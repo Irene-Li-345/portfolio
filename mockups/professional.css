@@ -1,0 +1,51 @@
+/* A restrained, editorial direction with a single quiet rose accent. */
+:root {
+  --paper: #fcfbf9;
+  --ink: #292b2e;
+  --muted: #626469;
+  --line: #e4e2df;
+  --pink: #f3edee;
+}
+.site-header { padding-block: 30px; }
+.wordmark span { color: #947b82; }
+nav { gap: 32px; }
+nav a:hover, nav a[aria-current] { border-color: #a18b92; }
+.hero { padding-block: 100px 80px; }
+.hero > .eyebrow { color: #71666a; }
+h1 { font-size: clamp(46px, 6vw, 76px); letter-spacing: -2.5px; }
+h1 span { color: #65666a; }
+.intro { max-width: 650px; font-size: 16px; line-height: 1.85; }
+.button { background: #303237; padding: 13px 22px; }
+.button:hover { background: #494b50; }
+.text-link { border-color: #c5b9bd; }
+.dot { background: #8e7d83; width: 6px; height: 6px; }
+.hero-note { color: #6b6b70; }
+.section-row { padding-block: 60px; }
+.eyebrow { font-size: 10px; letter-spacing: 1.7px; color: #707075; }
+h2 { font-size: clamp(28px, 3vw, 35px); }
+.projects { padding-block: 60px; }
+.section-heading { margin-bottom: 35px; }
+.project-grid { border: 0; gap: 30px; }
+article { padding: 25px 0 10px; border-top: 1px solid #ccc7c8; }
+article + article { border-left: 0; }
+.project-number { color: #8b8588; font-size: 28px; margin-bottom: 25px; }
+article .project-tech { color: #737176; letter-spacing: 1px; }
+h3 { font-size: 25px; }
+article p { line-height: 1.85; }
+.status { background: transparent; border: 1px solid #e3d9dd; color: #75656d; }
+.skill-list { gap: 0; }
+.skill-list li { border: 0; border-bottom: 1px solid var(--line); padding: 10px 0; width: 25%; font-size: 13px; }
+.contact { background: transparent; border-top: 1px solid var(--line); padding-block: 65px; margin-block: 0 20px; }
+.contact .eyebrow { color: #8a727a; }
+.email { font-size: 27px; border-color: #c6b4bc; }
+footer { padding-block: 20px; }
+@media (max-width: 700px) {
+  nav { gap: 20px; }
+  .hero { padding-block: 60px 50px; }
+  h1 { letter-spacing: -1.5px; }
+  .section-row, .projects { padding-block: 40px; }
+  .project-grid { gap: 20px; }
+  article + article { border-top: 1px solid #ccc7c8; }
+  .skill-list li { width: 50%; }
+  .contact { padding-inline: 0; }
+}
