@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Irene Li | Three color directions</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #34343a; background: #f8f7f4; font: 14px/1.5 Arial, sans-serif; }
+    header { padding: 24px 32px 18px; max-width: 1400px; margin: auto; }
+    h1 { font: 32px Georgia, serif; margin: 0 0 6px; }
+    header p { color: #66626b; margin: 0 0 18px; }
+    .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    button { text-align: left; padding: 16px; border: 1px solid #d9d7d3; border-radius: 6px; background: white; cursor: pointer; color: inherit; font: inherit; }
+    button[aria-pressed="true"] { outline: 2px solid #777078; outline-offset: 2px; }
+    button strong { display: block; margin-bottom: 5px; font: 20px Georgia, serif; }
+    button small { display: block; margin-top: 9px; color: #625e63; }
+    .swatches { display: flex; gap: 5px; margin-top: 12px; }
+    .swatches i { width: 30px; height: 16px; border: 1px solid #0000000d; border-radius: 3px; }
+    .toolbar { padding: 4px 32px 12px; max-width: 1400px; margin: auto; display: flex; justify-content: space-between; gap: 15px; }
+    a { color: #504958; }
+    iframe { display: block; width: calc(100% - 64px); height: 75vh; margin: 0 auto 24px; border: 1px solid #dedbd7; border-radius: 6px; background: white; }
+    @media (max-width: 650px) { .options { grid-template-columns: 1fr; } header { padding: 20px; } iframe { width: calc(100% - 24px); } .toolbar { padding-inline: 20px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Three softer directions</h1>
+    <p>Same homepage, three pastel palettes. Select an option to explore the full page below.</p>
+    <div class="options" aria-label="Choose a design preview">
+      <button type="button" data-theme="sage" aria-pressed="true"><strong>01 / Sage &amp; rose</strong>Fresh, quiet, and natural.<span class="swatches"><i style="background:#fafbf7"></i><i style="background:#e7efe3"></i><i style="background:#f5e9e8"></i><i style="background:#f1f0e3"></i></span><small>Off-white · soft sage · barely pink · pale oat</small></button>
+      <button type="button" data-theme="lavender" aria-pressed="false"><strong>02 / Lavender &amp; cloud</strong>Airy, cool, and creative.<span class="swatches"><i style="background:#fcfafc"></i><i style="background:#ece8f5"></i><i style="background:#f5e8ee"></i><i style="background:#e9eef5"></i></span><small>Cloud white · lavender · blush · powder blue</small></button>
+      <button type="button" data-theme="peach" aria-pressed="false"><strong>03 / Cream &amp; apricot</strong>Warm, welcoming, and understated.<span class="swatches"><i style="background:#fffcf7"></i><i style="background:#faeadd"></i><i style="background:#f4e6e5"></i><i style="background:#efefdf"></i></span><small>Ivory · pale apricot · dusty pink · light linen</small></button>
+    </div>
+  </header>
+  <div class="toolbar"><span id="current" aria-live="polite">Previewing 01 / Sage &amp; rose</span><a id="full" href="sage.html" target="_blank" rel="noopener">Open full-size preview ↗</a></div>
+  <iframe src="sage.html" title="Sage and rose homepage preview"></iframe>
+  <script>
+    const frame = document.querySelector('iframe');
+    document.querySelectorAll('button[data-theme]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('button[data-theme]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        const label = button.querySelector('strong').textContent;
+        frame.src = button.dataset.theme + '.html';
+        frame.title = label + ' homepage preview';
+        document.querySelector('#full').href = frame.src;
+        document.querySelector('#current').textContent = 'Previewing ' + label;
+      });
+    });
+  </script>
+</body>
+</html>
