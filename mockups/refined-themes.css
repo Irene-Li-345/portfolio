@@ -1,0 +1,23 @@
+/* Slightly more color while retaining the professional preview's layout. */
+.mist { --paper: #fbfcfd; --ink: #2e3943; --muted: #5f6b76; --line: #dfe5e9; --wash: #edf2f6; --accent: #5d7488; --button: #435c71; --pink: #f3e9ed; }
+.stone { --paper: #fcfcf9; --ink: #333b36; --muted: #626c64; --line: #e0e5dd; --wash: #eef1e9; --accent: #687b64; --button: #4e6250; --pink: #f2e9e8; }
+.rose { --paper: #fdfbfa; --ink: #3d3539; --muted: #70646a; --line: #e8dfe2; --wash: #f5edef; --accent: #8a6c79; --button: #705361; --pink: #f3e6eb; }
+.hero { border-bottom: 3px solid var(--wash); }
+.hero > .eyebrow, .contact .eyebrow, .wordmark span { color: var(--accent); }
+h1 span { color: var(--accent); }
+.button { background: var(--button); }
+.button:hover { background: var(--ink); }
+.dot { background: var(--accent); }
+nav a:hover, nav a[aria-current] { border-color: var(--accent); }
+.about { background: var(--wash); padding: 38px 30px; margin: 30px 0 50px; border-top: 0; }
+.projects { border-top: 0; padding-top: 0; }
+article { border-top: 2px solid var(--line); }
+.project-number { color: var(--accent); }
+.status { background: var(--pink); border-color: transparent; color: var(--ink); }
+.skill-list li { border-color: var(--line); }
+.contact { background: var(--wash); border-top: 0; margin-bottom: 45px; padding-inline: 24px; }
+.email, .text-link { border-color: var(--accent); }
+@media (max-width: 700px) {
+  .about { padding: 28px 20px; margin-block: 20px 40px; }
+  article + article { border-top: 2px solid var(--line); }
+}

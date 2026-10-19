@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Irene Li | Refined color previews</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #35363a; background: #faf9f7; font: 14px/1.6 Arial, sans-serif; }
+    header, .toolbar { max-width: 1400px; margin: auto; padding: 24px 32px 14px; }
+    h1 { font: 32px Georgia, serif; margin: 0 0 8px; }
+    header > p { color: #66676b; margin: 0 0 22px; }
+    .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    button { padding: 18px; text-align: left; font: inherit; color: inherit; background: white; border: 1px solid #dededb; border-radius: 4px; cursor: pointer; }
+    button[aria-pressed="true"] { outline: 2px solid #777a80; outline-offset: 2px; }
+    button strong { display: block; font: 22px Georgia, serif; margin-bottom: 8px; }
+    .swatches { display: flex; gap: 6px; margin-top: 14px; }
+    .swatches i { width: 36px; height: 16px; border: 1px solid #0000000d; border-radius: 2px; }
+    .toolbar { display: flex; justify-content: space-between; gap: 16px; padding-block: 10px 16px; }
+    a { color: #545963; }
+    iframe { display: block; width: calc(100% - 64px); height: 76vh; background: white; border: 1px solid #dededb; margin: 0 auto 24px; }
+    @media (max-width: 650px) { header, .toolbar { padding-inline: 20px; } .options { grid-template-columns: 1fr; } iframe { width: calc(100% - 24px); } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>A little color. Still professional.</h1>
+    <p>Three variations of the restrained design, with muted accents and softly tinted About and Contact sections.</p>
+    <div class="options" aria-label="Select a color direction">
+      <button type="button" data-theme="mist" aria-pressed="true"><strong>01 / Blue Mist</strong>Cool off-white, slate blue, and a trace of blush.<span class="swatches"><i style="background:#fbfcfd"></i><i style="background:#edf2f6"></i><i style="background:#5d7488"></i><i style="background:#f3e9ed"></i></span></button>
+      <button type="button" data-theme="stone" aria-pressed="false"><strong>02 / Sage Stone</strong>Warm white, muted olive, and soft rose details.<span class="swatches"><i style="background:#fcfcf9"></i><i style="background:#eef1e9"></i><i style="background:#687b64"></i><i style="background:#f2e9e8"></i></span></button>
+      <button type="button" data-theme="rose" aria-pressed="false"><strong>03 / Rose &amp; Graphite</strong>Ivory, pale rose, and a muted mauve accent.<span class="swatches"><i style="background:#fdfbfa"></i><i style="background:#f5edef"></i><i style="background:#8a6c79"></i><i style="background:#3d3539"></i></span></button>
+    </div>
+  </header>
+  <div class="toolbar"><span id="current" aria-live="polite">Previewing 01 / Blue Mist</span><a id="full" href="refined-mist.html" target="_blank" rel="noopener">Open full-size preview ↗</a></div>
+  <iframe src="refined-mist.html" title="Blue Mist homepage preview"></iframe>
+  <script>
+    const frame = document.querySelector('iframe');
+    document.querySelectorAll('button[data-theme]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('button[data-theme]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        const label = button.querySelector('strong').textContent;
+        const path = 'refined-' + button.dataset.theme + '.html';
+        frame.src = path;
+        frame.title = label + ' homepage preview';
+        document.querySelector('#full').href = path;
+        document.querySelector('#current').textContent = 'Previewing ' + label;
+      });
+    });
+  </script>
+</body>
+</html>
