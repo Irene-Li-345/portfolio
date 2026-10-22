@@ -133,6 +133,25 @@ body { position: relative; isolation: isolate; }
 .background-flower:nth-child(20) { right: 2%; top: 79%; transform: rotate(33deg); }
 
 /* Shared responsive rules for every page using this stylesheet. */
+.theme-toggle { flex-shrink: 0; padding: 9px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--accent); color: var(--ink); font: 12px Arial, sans-serif; cursor: pointer; min-height: 44px; }
+.theme-toggle[hidden] { display: none; }
+.theme-toggle:hover { background: var(--secondary); }
+.theme-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; }
+:root[data-theme="dark"] { color-scheme: dark; --paper: #211f1e; --ink: #f3eae1; --muted: #c8bcb1; --line: #4b413b; --pink: #493537; --accent: #3e3029; --secondary: #3d3034; --tone: #e5b89d; --third: #35372c; }
+[data-theme="dark"] .profile-placeholder { background: #594236; }
+[data-theme="dark"] .project-number { color: var(--tone); }
+[data-theme="dark"] .intro-illustration { color: #d5b6bc; }
+[data-theme="dark"] .intro-illustration:hover .book-drawing,
+[data-theme="dark"] .intro-illustration:hover .code-drawing { color: #f0c5cb; }
+[data-theme="dark"] .flower-drawing,
+[data-theme="dark"] .background-flowers { color: #d9b7bf; }
+[data-theme="dark"] .skip-link { background: var(--paper); color: var(--ink); }
+[data-theme="dark"] a:focus-visible { outline-color: var(--tone); }
+@media (max-width: 700px) {
+  .site-header { display: grid; grid-template-columns: 1fr auto; }
+  .site-header nav { grid-column: 1 / -1; grid-row: 2; }
+  .theme-toggle { grid-column: 2; grid-row: 1; }
+}
 nav, .actions, footer { flex-wrap: wrap; }
 .section-row > *, .project-grid > * { min-width: 0; }
 .hero-note .dot { flex-shrink: 0; }
