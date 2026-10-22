@@ -149,3 +149,24 @@ nav, .actions, footer { flex-wrap: wrap; }
   .hero h1 { font-size: 36px; letter-spacing: -1.5px; }
   .actions { gap: 14px; }
 }
+
+/* Accessible navigation and project filtering; content works without JavaScript. */
+[hidden] { display: none !important; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; }
+.menu-toggle { display: none; }
+.project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.project-filters button { padding: 8px 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 12px; }
+.project-filters button:hover { background: var(--secondary); }
+.project-filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--tone); }
+.filter-status { font-size: 12px; color: var(--muted); margin-block: 0 16px; }
+@media (max-width: 700px) {
+  .site-header { flex-direction: row; align-items: center; flex-wrap: wrap; }
+  .menu-toggle { display: inline-flex; align-items: center; gap: 9px; padding: 10px 12px; background: var(--accent); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; font-size: 13px; }
+  .menu-icon { width: 17px; height: 13px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; position: relative; }
+  .menu-icon::after { content: ''; position: absolute; left: 0; right: 0; top: 5px; border-top: 1px solid currentColor; }
+  #main-nav { flex-basis: 100%; }
+  #main-nav.menu-ready { display: none; }
+  #main-nav.menu-ready.is-open { display: flex; flex-direction: column; gap: 2px; padding-top: 8px; }
+  #main-nav a { padding: 10px 8px; }
+}
