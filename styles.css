@@ -96,3 +96,11 @@ article + article { border-left: 1px solid var(--line); }
 .contact { background: var(--secondary); border-radius: 4px; }
 .dot { background: var(--tone); }
 @media (max-width: 700px) { .hero { padding: 40px 20px; } .project-grid { gap: 12px; } }
+.hero { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); align-items: center; gap: 35px; }
+.hero-copy { min-width: 0; }
+.hero h1 { font-size: clamp(42px, 4.4vw, 62px); letter-spacing: -2px; }
+.profile-placeholder { width: 100%; max-width: 300px; aspect-ratio: 4 / 5; justify-self: end; background: #e7c7b6; border-radius: 90px 90px 14px 14px; }
+@media (max-width: 800px) {
+  .hero { grid-template-columns: 1fr; gap: 30px; }
+  .profile-placeholder { width: 220px; max-width: 100%; justify-self: center; }
+}
