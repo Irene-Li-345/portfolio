@@ -1,4 +1,4 @@
-:root { color-scheme: light; --paper: #faf9f6; --ink: #262b29; --muted: #636965; --line: #dedfd8; --pink: #f1e5e6; }
+:root { color-scheme: light; --paper: #faf9f6; --ink: #262b29; --muted: #636965; --line: #dedfd8; --pink: #f5e6e1; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 30px; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; line-height: 1.7; }
@@ -9,7 +9,7 @@ a:focus-visible { outline: 2px solid #815866; outline-offset: 6px; }
 .site-header, main, footer { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
 .site-header { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); gap: 24px; }
 .wordmark { font: 30px Georgia, 'Times New Roman', serif; letter-spacing: -1px; }
-.wordmark span { color: #9c6c7a; }
+.wordmark span { color: #94685f; }
 nav { display: flex; gap: 30px; font-size: 13px; }
 nav a { padding: 4px 0; }
 nav a:hover, nav a[aria-current] { border-bottom: 1px solid #a67b86; }
@@ -20,7 +20,7 @@ h1 { font-size: clamp(48px, 6.5vw, 82px); letter-spacing: -3px; margin: 0 0 30px
 h1 span { color: #727870; }
 .intro { max-width: 640px; font-size: 17px; color: var(--muted); }
 .actions { display: flex; align-items: center; gap: 30px; margin: 32px 0 42px; font-size: 13px; }
-.button { padding: 14px 22px; color: #fff; background: var(--ink); }
+.button { padding: 14px 22px; color: #fff; background: var(--ink); border-radius: 8px; }
 .button:hover { background: #454c47; }
 .button span { margin-left: 25px; }
 .text-link { border-bottom: 1px solid #a9aaa1; padding: 8px 0; }
@@ -43,7 +43,7 @@ h3 { font-size: 25px; margin: 15px 0; }
 .status { font-size: 10px; padding: 4px 9px; background: var(--pink); }
 .skill-list { display: flex; flex-wrap: wrap; list-style: none; padding: 0; gap: 10px; margin: 24px 0 0; }
 .skill-list li { border: 1px solid var(--line); padding: 6px 15px; font-size: 12px; }
-.contact { text-align: center; padding: 65px 24px; background: #f3eeee; margin: 15px 0 60px; }
+.contact { text-align: center; padding: 65px 24px; background: #f8eeeb; margin: 15px 0 60px; }
 .contact .eyebrow { margin-bottom: 20px; }
 .email { display: inline-block; font: 28px Georgia, serif; border-bottom: 1px solid #ad8a95; margin-top: 15px; padding-bottom: 6px; }
 footer { display: flex; justify-content: space-between; padding: 22px 0; border-top: 1px solid var(--line); font-size: 10px; color: var(--muted); }
