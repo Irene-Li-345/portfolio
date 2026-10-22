@@ -145,6 +145,7 @@ body { position: relative; isolation: isolate; }
 [data-theme="dark"] .intro-illustration:hover .code-drawing { color: #f0c5cb; }
 [data-theme="dark"] .flower-drawing,
 [data-theme="dark"] .background-flowers { color: #d9b7bf; }
+[data-theme="dark"] .background-flowers { opacity: .06; }
 [data-theme="dark"] .skip-link { background: var(--paper); color: var(--ink); }
 [data-theme="dark"] a:focus-visible { outline-color: var(--tone); }
 @media (max-width: 700px) {
