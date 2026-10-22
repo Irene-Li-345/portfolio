@@ -136,6 +136,17 @@ body { position: relative; isolation: isolate; }
 .theme-toggle { flex-shrink: 0; padding: 9px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--accent); color: var(--ink); font: 12px Arial, sans-serif; cursor: pointer; min-height: 44px; }
 .theme-toggle[hidden] { display: none; }
 .theme-toggle:hover { background: var(--secondary); }
+.project-grid { align-items: start; }
+.project-grid article { cursor: pointer; }
+.project-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 20px; padding: 10px 0; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink); font: 13px var(--font-body); text-align: left; cursor: pointer; }
+.project-toggle:hover { color: var(--tone); }
+.project-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; }
+.project-toggle span { font-size: 18px; }
+.project-details { overflow: hidden; cursor: auto; }
+.project-details[hidden] { display: none; }
+.project-details-inner { padding-top: 10px; }
+.project-details h4 { margin: 14px 0 6px; font-size: 13px; font-weight: 600; }
+.project-details p { margin: 0 0 14px; font-size: 13px; }
 .theme-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; }
 :root[data-theme="dark"] { color-scheme: dark; --paper: #211f1e; --ink: #f3eae1; --muted: #c8bcb1; --line: #4b413b; --pink: #493537; --accent: #3e3029; --secondary: #3d3034; --tone: #e5b89d; --third: #35372c; }
 [data-theme="dark"] .profile-placeholder { background: #594236; }
