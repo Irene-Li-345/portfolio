@@ -75,3 +75,24 @@ footer { display: flex; justify-content: space-between; padding: 22px 0; border-
 .flower-drawing { color: #b99ca5; opacity: .3; }
 @media (max-width: 700px) { .intro-illustration { display: none; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .book-drawing, .code-drawing { transition: none; } }
+
+/* Selected Cream & Apricot styling. */
+:root { --paper: #fffcf7; --ink: #433a33; --muted: #71665b; --line: #ebe1d6; --pink: #f5e4e2; --accent: #faeadd; --secondary: #f4e6e5; --tone: #88634e; --third: #efefdf; }
+body { background: var(--paper); }
+.hero { background: linear-gradient(110deg, var(--paper) 20%, var(--accent)); margin-top: 28px; padding: 65px 40px 45px; border-radius: 4px; }
+h1 span, .wordmark span { color: var(--tone); }
+.button { background: var(--accent); color: var(--ink); border: 1px solid var(--line); }
+.button:hover { background: var(--secondary); }
+nav a:hover, nav a[aria-current], .email { border-color: var(--tone); }
+.about { margin-top: 40px; }
+.project-grid { border: 0; gap: 16px; }
+article { background: var(--accent); border: 1px solid var(--line); border-radius: 4px; }
+article:nth-child(2) { background: var(--secondary); }
+article:nth-child(3) { background: var(--third); }
+article + article { border-left: 1px solid var(--line); }
+.project-number { color: var(--tone); }
+.skill-list li { background: var(--accent); border-radius: 3px; }
+.skill-list li:nth-child(3n + 2) { background: var(--secondary); }
+.contact { background: var(--secondary); border-radius: 4px; }
+.dot { background: var(--tone); }
+@media (max-width: 700px) { .hero { padding: 40px 20px; } .project-grid { gap: 12px; } }
