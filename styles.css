@@ -66,4 +66,11 @@ footer { display: flex; justify-content: space-between; padding: 22px 0; border-
   .contact { padding: 40px 18px; }
   footer { gap: 16px; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.intro-illustration { position: absolute; right: 0; bottom: 62px; width: clamp(190px, 27vw, 310px); color: #a18b91; }
+.intro-illustration svg { display: block; width: 100%; height: auto; }
+.book-drawing, .code-drawing { opacity: .55; transition: color .35s ease, opacity .35s ease; }
+.intro-illustration:hover .book-drawing, .intro-illustration:hover .code-drawing { color: #a56f7c; opacity: .8; }
+.flower-drawing { color: #b99ca5; opacity: .18; }
+@media (max-width: 1100px) { .intro-illustration { position: static; width: 230px; margin-top: 24px; margin-left: auto; } }
+@media (max-width: 700px) { .intro-illustration { width: 195px; margin-top: 18px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .book-drawing, .code-drawing { transition: none; } }
