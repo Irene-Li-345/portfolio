@@ -34,7 +34,6 @@
       <button id="previous" type="button" aria-label="Previous color scheme">← Previous</button>
       <label for="scheme">Color scheme <select id="scheme"></select></label>
       <button id="next" type="button" aria-label="Next color scheme">Next →</button>
-      <label><input id="tagline" type="checkbox"> Show tagline</label>
       <span id="count" aria-live="polite"></span>
     </div>
   </header>
@@ -54,7 +53,6 @@
     ];
     const select = document.querySelector('#scheme');
     const frame = document.querySelector('#preview');
-    const tagline = document.querySelector('#tagline');
     schemes.forEach((scheme, index) => {
       const option = document.createElement('option');
       option.value = index;
@@ -65,7 +63,7 @@
     function showScheme() {
       const index = Number(select.value);
       const scheme = schemes[index];
-      frame.src = scheme.path + "?tagline=" + (tagline.checked ? "show" : "hide");
+      frame.src = scheme.path;
       frame.title = scheme.name + ' homepage preview';
       document.querySelector('#count').textContent = (index + 1) + ' of ' + schemes.length;
       document.querySelector('#description').textContent = scheme.description;
@@ -80,7 +78,6 @@
       });
     }
 
-    tagline.addEventListener('change', showScheme);
     select.addEventListener('change', showScheme);
     function move(direction) { select.value = (Number(select.value) + direction + schemes.length) % schemes.length; showScheme(); }
     document.querySelector('#previous').addEventListener('click', () => move(-1));
