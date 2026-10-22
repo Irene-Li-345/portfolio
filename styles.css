@@ -108,7 +108,7 @@ article + article { border-left: 1px solid var(--line); }
 }
 /* Small, varied botanical details, kept behind the content. */
 body { position: relative; isolation: isolate; }
-.background-flowers { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: #b99ca5; opacity: .12; }
+.background-flowers { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: #b99ca5; opacity: .18; }
 .background-flower { position: absolute; width: 42px; height: 58px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
 .background-flower:nth-child(1) { left: 1%; top: 7%; transform: rotate(-24deg); }
 .background-flower:nth-child(2) { right: 2%; top: 15%; transform: rotate(38deg); }
@@ -122,3 +122,13 @@ body { position: relative; isolation: isolate; }
 .background-flower:nth-child(10) { right: 2%; top: 87%; transform: rotate(31deg); }
 .background-flower:nth-child(11) { left: 8%; top: 95%; transform: rotate(-42deg); }
 @media (max-width: 700px) { .background-flower { width: 27px; height: 39px; } }
+
+.background-flower:nth-child(12) { right: 4%; top: 5%; transform: rotate(52deg); }
+.background-flower:nth-child(13) { left: 2%; top: 16%; transform: rotate(-39deg); }
+.background-flower:nth-child(14) { right: 2%; top: 25%; transform: rotate(18deg) scaleX(-1); }
+.background-flower:nth-child(15) { left: 4%; top: 34%; transform: rotate(-72deg); }
+.background-flower:nth-child(16) { right: 3%; top: 43%; transform: rotate(27deg); }
+.background-flower:nth-child(17) { left: 1%; top: 52%; transform: rotate(-29deg); }
+.background-flower:nth-child(18) { right: 4%; top: 60%; transform: rotate(42deg) scaleX(-1); }
+.background-flower:nth-child(19) { left: 3%; top: 69%; transform: rotate(-55deg); }
+.background-flower:nth-child(20) { right: 2%; top: 79%; transform: rotate(33deg); }
