@@ -108,7 +108,7 @@ article + article { border-left: 1px solid var(--line); }
 }
 /* Small, varied botanical details, kept behind the content. */
 body { position: relative; isolation: isolate; }
-.background-flowers { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: #b99ca5; opacity: .18; }
+.background-flowers { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: #b99ca5; opacity: .12; }
 .background-flower { position: absolute; width: 42px; height: 58px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
 .background-flower:nth-child(1) { left: 1%; top: 7%; transform: rotate(-24deg); }
 .background-flower:nth-child(2) { right: 2%; top: 15%; transform: rotate(38deg); }
