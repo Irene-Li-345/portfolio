@@ -106,18 +106,19 @@ article + article { border-left: 1px solid var(--line); }
   .hero { grid-template-columns: 1fr; gap: 30px; }
   .profile-placeholder { width: 220px; max-width: 100%; justify-self: center; }
 }
-/* Widely spaced decorative flowers, softer than the About illustration. */
+/* Small, varied botanical details, kept behind the content. */
 body { position: relative; isolation: isolate; }
 .background-flowers { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: #b99ca5; opacity: .12; }
-.background-flower { position: absolute; width: 62px; height: 96px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
-.background-flower:nth-child(1) { left: 1%; top: 180px; transform: rotate(-18deg); }
-.background-flower:nth-child(2) { right: 1%; top: 640px; width: 51px; transform: rotate(15deg); }
-.background-flower:nth-child(3) { left: 2%; top: 1110px; width: 45px; transform: rotate(8deg); }
-.background-flower:nth-child(4) { right: 2%; top: 1550px; transform: rotate(-12deg); }
-.background-flower:nth-child(5) { left: 8%; bottom: 100px; width: 50px; transform: rotate(-22deg); }
-@media (max-width: 700px) {
-  .background-flower { width: 34px; height: 65px; }
-  .background-flower:nth-child(2), .background-flower:nth-child(4) { right: 0; width: 34px; }
-  .background-flower:nth-child(3) { left: 0; width: 30px; top: 1650px; }
-  .background-flower:nth-child(5) { left: 0; width: 30px; bottom: 300px; }
-}
+.background-flower { position: absolute; width: 42px; height: 58px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.background-flower:nth-child(1) { left: 1%; top: 7%; transform: rotate(-24deg); }
+.background-flower:nth-child(2) { right: 2%; top: 15%; transform: rotate(38deg); }
+.background-flower:nth-child(3) { left: 3%; top: 25%; transform: rotate(75deg); }
+.background-flower:nth-child(4) { right: 1%; top: 34%; transform: rotate(-33deg); }
+.background-flower:nth-child(5) { left: 1%; top: 43%; transform: rotate(22deg) scaleX(-1); }
+.background-flower:nth-child(6) { right: 3%; top: 51%; transform: rotate(-48deg); }
+.background-flower:nth-child(7) { left: 2%; top: 60%; transform: rotate(44deg); }
+.background-flower:nth-child(8) { right: 1%; top: 69%; transform: rotate(-65deg); }
+.background-flower:nth-child(9) { left: 3%; top: 78%; transform: rotate(-18deg) scaleX(-1); }
+.background-flower:nth-child(10) { right: 2%; top: 87%; transform: rotate(31deg); }
+.background-flower:nth-child(11) { left: 8%; top: 95%; transform: rotate(-42deg); }
+@media (max-width: 700px) { .background-flower { width: 27px; height: 39px; } }
