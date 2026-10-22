@@ -66,10 +66,12 @@ footer { display: flex; justify-content: space-between; padding: 22px 0; border-
   .contact { padding: 40px 18px; }
   footer { gap: 16px; }
 }
-.intro-illustration { width: 225px; max-width: 100%; margin: 24px 0 0 auto; color: #a18b91; }
+.about-label { position: relative; min-width: 0; }
+.about-label > .eyebrow { margin-bottom: 0; }
+.intro-illustration { position: absolute; top: 35px; left: 0; width: 190px; max-width: 100%; color: #a18b91; }
 .intro-illustration svg { display: block; width: 100%; height: auto; }
 .book-drawing, .code-drawing { opacity: .55; transition: color .35s ease, opacity .35s ease; }
 .intro-illustration:hover .book-drawing, .intro-illustration:hover .code-drawing { color: #a56f7c; opacity: .8; }
 .flower-drawing { color: #b99ca5; opacity: .18; }
-@media (max-width: 700px) { .intro-illustration { width: 195px; margin-top: 18px; } }
+@media (max-width: 700px) { .intro-illustration { display: none; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .book-drawing, .code-drawing { transition: none; } }
