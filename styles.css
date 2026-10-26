@@ -81,7 +81,7 @@ body { background: var(--paper); }
 .hero { background: linear-gradient(120deg, var(--paper) 5%, var(--accent) 65%, var(--secondary)); margin-top: 28px; padding: 65px 40px 45px; border-radius: 4px; }
 h1 span, .wordmark span { color: var(--tone); }
 .button { background: linear-gradient(120deg, var(--accent), var(--secondary)); color: var(--ink); border: 1px solid var(--line); }
-.button:hover, .button:focus-visible { background: var(--tone); color: var(--paper); border-color: var(--tone); }
+.button:hover, .button:focus-visible { background: var(--hover-peach); color: var(--ink); border-color: var(--hover-peach); }
 nav a:hover, nav a[aria-current], .email { border-color: var(--tone); }
 .about { margin-top: 40px; }
 .project-grid { border: 0; gap: 16px; }
@@ -135,11 +135,11 @@ body { position: relative; isolation: isolate; }
 /* Shared responsive rules for every page using this stylesheet. */
 .theme-toggle { flex-shrink: 0; padding: 9px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--accent); color: var(--ink); font: 12px Arial, sans-serif; cursor: pointer; min-height: 44px; }
 .theme-toggle[hidden] { display: none; }
-.theme-toggle:hover, .theme-toggle:focus-visible { background: var(--tone); color: var(--paper); border-color: var(--tone); }
+.theme-toggle:hover, .theme-toggle:focus-visible { background: var(--hover-pink); color: var(--ink); border-color: var(--hover-pink); }
 .project-grid { align-items: start; }
 .project-grid article { cursor: pointer; }
 .project-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 20px; padding: 10px 0; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink); font: 13px var(--font-body); text-align: left; cursor: pointer; }
-.project-toggle:hover, .project-toggle:focus-visible { background: var(--tone); color: var(--paper); border-color: var(--tone); border-radius: 4px; }
+.project-toggle:hover, .project-toggle:focus-visible { background: var(--card-hover, var(--hover-peach)); color: var(--ink); border-color: var(--card-hover, var(--hover-peach)); border-radius: 4px; }
 .project-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; }
 .project-toggle span { font-size: 18px; }
 .project-details { overflow: hidden; cursor: auto; }
@@ -210,3 +210,9 @@ nav, .actions, footer { flex-wrap: wrap; }
 .certificates-intro {
   background: radial-gradient(ellipse at 85% 35%, var(--accent), transparent 70%);
 }
+
+/* Stronger pastel hover colors, coordinated with each card. */
+:root { --hover-peach: #efbb9e; --hover-pink: #e6b2c0; --hover-green: #c5d0a9; }
+:root[data-theme="dark"] { --hover-peach: #754936; --hover-pink: #754456; --hover-green: #4c613c; }
+.project-grid article:nth-child(2) { --card-hover: var(--hover-pink); }
+.project-grid article:nth-child(3) { --card-hover: var(--hover-green); }
