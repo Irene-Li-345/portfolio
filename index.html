@@ -57,7 +57,9 @@
       </div>
       <div class="hero-note"><span class="dot" aria-hidden="true"></span> Seeking internships &amp; open to new opportunities</div></div>
       <!-- Temporary Unsplash cat photo; replace with Irene's own photo later. -->
-      <div class="profile-placeholder"><img src="assets/temporary-cat.jpg" alt="Temporary photo of a cat; placeholder for Irene's photo" width="600" height="750" fetchpriority="high"></div>
+      <div class="profile-placeholder"><picture>
+        <source type="image/webp" srcset="assets/profile-300.webp 300w, assets/profile-600.webp 600w" sizes="(max-width: 800px) 220px, (max-width: 1060px) calc((100vw - 211px) / 2.7), 300px">
+        <img src="assets/profile.jpg" alt="Temporary photo of a cat; placeholder for Irene's photo" width="600" height="750" fetchpriority="high"></picture></div>
     </section>
 
     <section class="about section-row" id="about" aria-labelledby="about-heading">

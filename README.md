@@ -19,3 +19,15 @@ The existing JavaScript automatically attaches expandable behavior to each `.pro
 The homepage shows three selected project previews. To change those, edit the articles in `index.html` and point each View project details link to the corresponding `projects.html#project-ID`. New projects do not need a homepage preview.
 
 Keep image alt text descriptive and any future image assets under 500 KB. See `ACCESSIBILITY.md` for accessibility checks.
+
+## Replacing the homepage photo
+
+Prepare each new photo before publishing; swapping the source file alone does not optimize it automatically. Install Python and Pillow (`python -m pip install Pillow`), then run from this repository:
+
+```powershell
+python scripts/optimize_profile.py "C:/path/to/new-photo.jpg"
+```
+
+The script keeps the original intact, corrects EXIF orientation, removes metadata from the generated files, and crops the center to the existing 4:5 portrait shape. It creates `assets/profile-300.webp` (300 ? 375), `assets/profile-600.webp` (600 ? 750), and `assets/profile.jpg` (600 ? 750 JPEG fallback). Each file must be below 500,000 bytes. Review the central crop; pre-crop the source if needed. Small source images can look soft when enlarged.
+
+The homepage automatically uses these stable filenames and selects a WebP size for the viewport and pixel density. Keep the image's `width="600"`, `height="750"`, and `fetchpriority="high"`. Update the alt text to describe the replacement photo accurately; the script does not change HTML or invent alt text. Preview both desktop and mobile, then commit and push the three generated images and any alt-text change.
