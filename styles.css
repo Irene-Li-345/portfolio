@@ -219,15 +219,15 @@ nav, .actions, footer { flex-wrap: wrap; }
 
 /* Certificates: a peach-pink blend with the existing sage accents. */
 .certificates-theme {
-  --certificate-blush: #ebb7af;
-  --certificate-soft: #f5e0d9;
+  --certificate-blush: #f3d2c9;
+  --certificate-soft: #fbeee8;
   --certificate-green: var(--hover-green);
   --certificate-green-soft: var(--third);
   --certificate-green-ink: #52633d;
 }
 [data-theme="dark"] .certificates-theme {
-  --certificate-blush: #70444b;
-  --certificate-soft: #443035;
+  --certificate-blush: #805960;
+  --certificate-soft: #503d42;
   --certificate-green-ink: #c5d0a9;
 }
 .certificates-theme .certificates-intro {
@@ -253,3 +253,30 @@ nav, .actions, footer { flex-wrap: wrap; }
 .certificates-theme a:focus-visible,
 .certificates-theme .theme-toggle:focus-visible { outline-color: var(--certificate-green-ink); }
 .certificates-theme .wordmark span { color: var(--certificate-green-ink); }
+
+/* The home page shares the lighter blush palette and sage details. */
+.portfolio-theme {
+  --accent: #fbeee8;
+  --secondary: #f3d2c9;
+  --hover-peach: #efc0b5;
+  --hover-pink: #efc0b5;
+  --home-green-ink: #52633d;
+}
+[data-theme="dark"] .portfolio-theme {
+  --accent: #503d42;
+  --secondary: #805960;
+  --hover-peach: #90656d;
+  --hover-pink: #90656d;
+  --home-green-ink: #c5d0a9;
+}
+.portfolio-theme .project-grid article { --card-hover: var(--hover-peach); }
+.portfolio-theme .project-grid article:nth-child(3) { --card-hover: var(--hover-green); }
+.portfolio-theme .project-grid article { border-top: 3px solid var(--hover-green); }
+.portfolio-theme .dot { background: var(--hover-green); }
+.portfolio-theme .wordmark span { color: var(--home-green-ink); }
+.portfolio-theme nav a:hover,
+.portfolio-theme nav a[aria-current],
+.portfolio-theme .email,
+.portfolio-theme .text-link { border-color: var(--home-green-ink); }
+.portfolio-theme .theme-toggle:hover,
+.portfolio-theme .theme-toggle:focus-visible { background: var(--hover-green); }
