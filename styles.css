@@ -81,7 +81,7 @@ body { background: var(--paper); }
 .hero { background: linear-gradient(120deg, var(--paper) 5%, var(--accent) 65%, var(--secondary)); margin-top: 28px; padding: 65px 40px 45px; border-radius: 4px; }
 h1 span, .wordmark span { color: var(--tone); }
 .button { background: linear-gradient(120deg, var(--accent), var(--secondary)); color: var(--ink); border: 1px solid var(--line); }
-.button:hover { background: linear-gradient(120deg, var(--secondary), var(--accent)); }
+.button:hover, .button:focus-visible { background: var(--tone); color: var(--paper); border-color: var(--tone); }
 nav a:hover, nav a[aria-current], .email { border-color: var(--tone); }
 .about { margin-top: 40px; }
 .project-grid { border: 0; gap: 16px; }
@@ -135,11 +135,11 @@ body { position: relative; isolation: isolate; }
 /* Shared responsive rules for every page using this stylesheet. */
 .theme-toggle { flex-shrink: 0; padding: 9px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--accent); color: var(--ink); font: 12px Arial, sans-serif; cursor: pointer; min-height: 44px; }
 .theme-toggle[hidden] { display: none; }
-.theme-toggle:hover { background: var(--secondary); }
+.theme-toggle:hover, .theme-toggle:focus-visible { background: var(--tone); color: var(--paper); border-color: var(--tone); }
 .project-grid { align-items: start; }
 .project-grid article { cursor: pointer; }
 .project-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 20px; padding: 10px 0; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink); font: 13px var(--font-body); text-align: left; cursor: pointer; }
-.project-toggle:hover { color: var(--tone); }
+.project-toggle:hover, .project-toggle:focus-visible { background: var(--tone); color: var(--paper); border-color: var(--tone); border-radius: 4px; }
 .project-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; }
 .project-toggle span { font-size: 18px; }
 .project-details { overflow: hidden; cursor: auto; }
