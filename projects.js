@@ -9,7 +9,7 @@ document.querySelectorAll('.project-toggle').forEach(button => {
     const startHeight = panel.hidden ? 0 : panel.getBoundingClientRect().height;
     animation?.cancel();
     button.setAttribute('aria-expanded', String(opening));
-    button.setAttribute('aria-label', `${opening ? 'Hide' : 'Show'} details for ${title}`);
+    button.setAttribute('aria-label', `${opening ? 'Show less about' : 'Read more about'} ${title}`);
     button.replaceChildren(document.createTextNode(opening ? 'Show less ' : 'Read more '));
     const icon = document.createElement('span');
     icon.setAttribute('aria-hidden', 'true');
