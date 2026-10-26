@@ -216,3 +216,40 @@ nav, .actions, footer { flex-wrap: wrap; }
 :root[data-theme="dark"] { --hover-peach: #754936; --hover-pink: #754456; --hover-green: #4c613c; }
 .project-grid article:nth-child(2) { --card-hover: var(--hover-pink); }
 .project-grid article:nth-child(3) { --card-hover: var(--hover-green); }
+
+/* Certificates: a peach-pink blend with the existing sage accents. */
+.certificates-theme {
+  --certificate-blush: #ebb7af;
+  --certificate-soft: #f5e0d9;
+  --certificate-green: var(--hover-green);
+  --certificate-green-soft: var(--third);
+  --certificate-green-ink: #52633d;
+}
+[data-theme="dark"] .certificates-theme {
+  --certificate-blush: #70444b;
+  --certificate-soft: #443035;
+  --certificate-green-ink: #c5d0a9;
+}
+.certificates-theme .certificates-intro {
+  background: radial-gradient(ellipse at 85% 35%, var(--certificate-soft), transparent 70%);
+}
+.certificates-theme .certificate-card {
+  background: linear-gradient(135deg, var(--certificate-soft), var(--certificate-blush));
+  border-top: 3px solid var(--certificate-green);
+}
+.certificates-theme .certificate-card .eyebrow { color: var(--certificate-green-ink); }
+.certificates-theme .text-link { border-color: var(--certificate-green); }
+.certificates-theme .text-link:hover,
+.certificates-theme .text-link:focus-visible {
+  background: var(--certificate-green-soft);
+  color: var(--certificate-green-ink);
+  border-color: var(--certificate-green-ink);
+}
+.certificates-theme .theme-toggle { background: var(--certificate-soft); border-color: var(--certificate-blush); }
+.certificates-theme .theme-toggle:hover,
+.certificates-theme .theme-toggle:focus-visible { background: var(--certificate-green); color: var(--ink); border-color: var(--certificate-green); }
+.certificates-theme nav a:hover,
+.certificates-theme nav a[aria-current] { border-color: var(--certificate-green-ink); }
+.certificates-theme a:focus-visible,
+.certificates-theme .theme-toggle:focus-visible { outline-color: var(--certificate-green-ink); }
+.certificates-theme .wordmark span { color: var(--certificate-green-ink); }
