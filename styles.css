@@ -216,3 +216,13 @@ nav, .actions, footer { flex-wrap: wrap; }
 :root[data-theme="dark"] { --hover-peach: #754936; --hover-pink: #754456; --hover-green: #4c613c; }
 .project-grid article:nth-child(2) { --card-hover: var(--hover-pink); }
 .project-grid article:nth-child(3) { --card-hover: var(--hover-green); }
+
+/* Project summaries link to the full expandable collection. */
+.projects-page { padding-bottom: 65px; }
+.projects-intro { padding: 75px 0 35px; max-width: 780px; }
+.projects-intro h1 { font-size: clamp(42px, 6vw, 72px); }
+.projects-page-link { display: inline-block; margin-top: 28px; }
+.project-page-link { display: inline-block; margin-top: 16px; font-size: 13px; }
+.project-grid article { cursor: auto; }
+.projects-page .project-grid article { cursor: pointer; }
+@media (max-width: 700px) { .projects-intro { padding-top: 45px; } }

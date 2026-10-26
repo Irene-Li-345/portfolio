@@ -6,6 +6,7 @@ Checked October 26, 2026 using Lighthouse 13.5.0 with local Chrome in headless m
 | --- | --- | --- |
 | Home | 100 | 100 |
 | Certificates | 100 | 100 |
+| Projects | 100 | 100 |
 
 Scores are Lighthouse Accessibility scores, not a guarantee of complete accessibility. These runs used the Lighthouse API against a temporary localhost server rather than the DevTools panel.
 
@@ -17,3 +18,5 @@ Scores are Lighthouse Accessibility scores, not a guarantee of complete accessib
 - No image compression was necessary.
 
 To repeat in Chrome DevTools: serve the repository locally, open each page, choose Lighthouse, select Accessibility, and Analyze page load. Repeat with the site in each theme. Aim for at least 90 and review manual checks as well.
+
+The Projects page was also checked at a 390-pixel viewport with no horizontal overflow. Its skip link focuses main content, and Enter/Space expand and collapse project details.
