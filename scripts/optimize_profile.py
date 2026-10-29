@@ -27,7 +27,7 @@ def main():
     parser.add_argument("source", type=Path, help="Replacement portrait (cropped centrally to 4:5)")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "assets")
     args = parser.parse_args()
-    names = ("profile.jpg", "profile-300.webp", "profile-600.webp")
+    names = ("profile.jpg", "profile-300.webp", "profile-400.webp", "profile-600.webp")
     if args.source.resolve() in [(args.output_dir / name).resolve() for name in names]:
         parser.error("Use a separate original file so the source is not overwritten.")
     with Image.open(args.source) as source:
@@ -40,6 +40,7 @@ def main():
     outputs = {
         "profile.jpg": encode(portrait, "JPEG"),
         "profile-300.webp": encode(portrait.resize((300, 375), Image.Resampling.LANCZOS), "WEBP"),
+        "profile-400.webp": encode(portrait.resize((400, 500), Image.Resampling.LANCZOS), "WEBP"),
         "profile-600.webp": encode(portrait, "WEBP"),
     }
     args.output_dir.mkdir(parents=True, exist_ok=True)

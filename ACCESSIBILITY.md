@@ -20,3 +20,20 @@ Scores are Lighthouse Accessibility scores, not a guarantee of complete accessib
 To repeat in Chrome DevTools: serve the repository locally, open each page, choose Lighthouse, select Accessibility, and Analyze page load. Repeat with the site in each theme. Aim for at least 90 and review manual checks as well.
 
 The Projects page was also checked at a 390-pixel viewport with no horizontal overflow. Its skip link focuses main content, and Enter/Space expand and collapse project details.
+
+## Performance follow-up - October 29, 2026
+
+Clean Chrome (extensions disabled), Lighthouse 13.5.0. Live baseline before these changes: Performance 85, Accessibility 100, Best Practices 96, SEO 100; CLS 0.212. The CSP warning and unexpected Google Fonts request in the supplied report did not reproduce. The clean baseline instead found a missing favicon (HTTP 404).
+
+Local optimized results:
+
+| Page / configuration | Performance | Accessibility | Best Practices | SEO | CLS |
+| --- | --- | --- | --- | --- | --- |
+| Home / desktop | 97 | 100 | 100 | 100 | 0 |
+| Projects / desktop | 97 | 100 | 100 | 100 | 0 |
+| Certificates / desktop | 97 | 100 | 100 | 100 | 0 |
+| Home / mobile | 100 | 100 | 100 | 100 | 0 |
+
+Reserved the theme button's space before initialization and fixed its width so theme label changes do not resize the header. Added a relative SVG favicon to all pages. Added a 400 x 500 WebP (11,604 bytes) and included it in the reusable replacement-photo workflow. Existing img width, height, and alt text remain unchanged. All three pages fit widths 320, 390, 768, 966, and 1440 without horizontal overflow; theme button geometry stays unchanged when toggled. A separate replacement image generated all four output sizes successfully.
+
+These are lab results; local and hosted timings are not directly comparable. GitHub Pages' cache-lifetime warning remains a hosting concern. No security-policy change was made because the reported CSP violation did not reproduce in clean Chrome.

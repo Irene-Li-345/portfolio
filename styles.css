@@ -134,8 +134,9 @@ body { position: relative; isolation: isolate; }
 .background-flower:nth-child(20) { right: 2%; top: 79%; transform: rotate(33deg); }
 
 /* Shared responsive rules for every page using this stylesheet. */
-.theme-toggle { flex-shrink: 0; padding: 9px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--accent); color: var(--ink); font: 12px Arial, sans-serif; cursor: pointer; min-height: 44px; }
-.theme-toggle[hidden] { display: none; }
+.theme-toggle { min-width: 100px; flex-shrink: 0; padding: 9px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--accent); color: var(--ink); font: 12px Arial, sans-serif; cursor: pointer; min-height: 44px; }
+/* Keep header geometry stable until JavaScript initializes the control. */
+.theme-toggle[hidden] { display: block; visibility: hidden; }
 .theme-toggle:hover, .theme-toggle:focus-visible { background: var(--hover-pink); color: var(--ink); border-color: var(--hover-pink); }
 .project-grid { align-items: start; }
 .project-grid article { cursor: pointer; }

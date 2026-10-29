@@ -139,3 +139,26 @@ Serve the repository using a local HTTP server and open index.html in Chrome. Fo
 ## Additional accessibility audit
 
 Prior Lighthouse accessibility results for all three pages are recorded in ACCESSIBILITY.md. To rerun, open Chrome DevTools, select Lighthouse, enable Accessibility, and analyze each page. Aim for at least 90; review manual checks as well. Lighthouse scores do not replace keyboard or visual testing.
+
+## Optimization follow-up - October 29, 2026
+
+### T19: Stable theme-control layout
+
+- **What is being tested:** Theme-button geometry and responsive overflow on all three pages.
+- **Steps to run:** Open each page at widths 320, 390, 768, 966, and 1440 pixels. Toggle the theme and compare the button's position and size. Run Lighthouse to measure load-time layout shift.
+- **Expected result:** No horizontal overflow; button geometry remains stable; load-time CLS is below 0.1.
+- **Actual result:** **Pass**. Button geometry remained unchanged and all tested widths fit. Lighthouse measured CLS 0 on all three desktop pages and mobile Home.
+
+### T20: Intermediate portrait and future replacement
+
+- **What is being tested:** The intermediate WebP and reusable portrait generation workflow.
+- **Steps to run:** Generate portrait assets from a separate 900 x 1200 photo using scripts/optimize_profile.py with --output-dir pointing to a temporary directory. Inspect generated dimensions and sizes, plus the homepage srcset and original img attributes.
+- **Expected result:** 300 x 375, 400 x 500, and 600 x 750 WebPs plus a 600 x 750 JPEG, all under 500,000 bytes. The homepage offers the intermediate source and preserves width, height, and alt text.
+- **Actual result:** **Pass**. All outputs passed size and dimension checks; the existing image attributes are unchanged. The cat's new 400-pixel WebP is 11,604 bytes.
+
+### T21: Clean-browser resource and security checks
+
+- **What is being tested:** Missing resources, console errors, and reported CSP issues.
+- **Steps to run:** Use a fresh Chrome instance with extensions disabled. Run Lighthouse on Home, Projects, and Certificates and inspect console errors and the Issues audit.
+- **Expected result:** No missing favicon, uncaught console error, or CSP issue from the site.
+- **Actual result:** **Pass** for the local optimized pages. All three desktop audits returned no console errors or Issues entries and scored 100 for Best Practices. The supplied report's CSP warning and external font request did not reproduce in the clean live baseline either.
