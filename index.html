@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Metadata, page title, theme initialization, and shared assets. -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
+<!-- Visible page content begins here. -->
 <body>
+  <!-- Decorative flowers are hidden from screen readers and do not accept clicks. -->
   <div class="background-flowers" aria-hidden="true">
     <svg class="background-flower" viewBox="0 0 60 75"><path d="M30 65c3-14 1-28 0-39M30 26c-10 4-16-4-9-9-6-8 3-15 9-7 7-8 15-1 9 7 8 6 1 13-9 9Z"/><circle cx="30" cy="18" r="2.5"/></svg>
     <svg class="background-flower" viewBox="0 0 60 75"><path d="M17 63c7-18 15-31 25-44M25 46C10 44 9 32 9 32c15 0 16 14 16 14M32 35c15 3 22-9 22-9-14-5-22 9-22 9M19 56c14 3 21-5 21-5-11-7-21 5-21 5"/></svg>
@@ -33,9 +36,12 @@
     <svg class="background-flower" viewBox="0 0 60 75"><path d="M17 63c7-18 15-31 25-44M25 46C10 44 9 32 9 32c15 0 16 14 16 14M32 35c15 3 22-9 22-9-14-5-22 9-22 9M19 56c14 3 21-5 21-5-11-7-21 5-21 5"/></svg>
     <svg class="background-flower" viewBox="0 0 60 75"><path d="M30 65V32M30 32c-9-2-14-13-8-22l8 7 8-7c6 11 1 20-8 22ZM30 31V19M30 52c-11 0-16-9-16-9 13-2 16 9 16 9M30 60c10-2 15-9 15-9-11-3-15 9-15 9"/></svg>
   </div>
+  <!-- Keyboard shortcut that skips navigation and focuses the main content. -->
   <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Shared site identity, navigation, and theme switch. -->
   <header class="site-header">
     <a class="wordmark" href="index.html" aria-label="Irene Li home">Irene Li<span>.</span></a>
+    <!-- Links between pages and homepage sections; aria-current marks this page. -->
     <nav id="main-nav" aria-label="Main navigation">
       <a href="index.html" aria-current="page">Home</a>
       <a href="#about">About</a>
@@ -44,29 +50,38 @@
       <a href="certificates.html">Certificates</a>
       <a href="#contact">Contact</a>
     </nav>
+    <!-- Theme switch; space is reserved while JavaScript prepares it. -->
     <button class="theme-toggle" type="button" aria-pressed="false" hidden>Dark mode</button>
   </header>
 
+  <!-- Main content can receive focus from the skip link. -->
   <main id="main" tabindex="-1">
+    <!-- Homepage greeting, introduction, and primary actions. -->
     <section class="hero" aria-labelledby="intro-heading">
       <div class="hero-copy"><p class="eyebrow">STUDENT · DEVELOPER · ALWAYS LEARNING</p>
       <h1 id="intro-heading">Hello, I’m Irene!</h1>
       <p class="intro">I&#8217;m a Software and Data Engineering Technology student at NJIT. I enjoy creating websites and developing software, and I work with Python, C++, and Java.</p>
+      <!-- Primary links to explore projects or send an email. -->
       <div class="actions">
         <a class="button" href="projects.html">Explore my projects</a>
         <a class="text-link" href="mailto:il94@njit.edu">Get in touch</a>
       </div>
+      <!-- Short availability message with a decorative status dot. -->
       <div class="hero-note"><span class="dot" aria-hidden="true"></span> Seeking internships &amp; open to new opportunities</div></div>
       <!-- Temporary Unsplash cat photo; replace with Irene's own photo later. -->
+      <!-- Responsive WebP portrait with a JPEG fallback and reserved image dimensions. -->
       <div class="profile-placeholder"><picture>
         <source type="image/webp" srcset="assets/profile-300.webp 300w, assets/profile-400.webp 400w, assets/profile-600.webp 600w" sizes="(max-width: 800px) 220px, (max-width: 1060px) calc((100vw - 211px) / 2.7), 300px">
         <img src="assets/profile.jpg" alt="Temporary photo of a cat; placeholder for Irene's photo" width="600" height="750" fetchpriority="high"></picture></div>
     </section>
 
+    <!-- Personal background with a decorative illustration. -->
     <section class="about section-row" id="about" aria-labelledby="about-heading">
       <div class="about-label"><p class="eyebrow">01 / A LITTLE ABOUT ME</p>
+<!-- Inline line-art illustration; screen readers can skip this decoration. -->
 <div class="intro-illustration" aria-hidden="true">
         <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <!-- SVG paths draw the books. -->
           <g class="book-drawing">
             <path d="M65 127V65a4 4 0 0 1 4-4h17a4 4 0 0 1 4 4v62Z"/>
             <path d="M71 70h13M71 116h13M76 81v24"/>
@@ -75,12 +90,14 @@
             <path d="m130 62 19-5 18 65-20 5Z"/>
             <path d="m134 72 18-5M146 114l17-5M57 132h120"/>
           </g>
+          <!-- SVG shapes draw the laptop. -->
           <g class="code-drawing">
             <rect x="204" y="59" width="103" height="65" rx="5"/>
             <path d="M211 67h89v49h-89ZM204 124l-13 12c0 3 4 5 8 5h113c4 0 8-2 8-5l-13-12M244 125v5h24v-5"/>
             <rect x="222" y="77" width="29" height="28" rx="2"/>
             <path d="M260 80h29M260 87h24M260 94h27M260 101h17"/>
           </g>
+          <!-- SVG paths add small flower details. -->
           <g class="flower-drawing">
             <path d="M40 105c0-18 0-34-5-49M39 87c-12 0-14-8-14-8 10-2 14 8 14 8M40 96c10-2 13-10 13-10-10-1-13 10-13 10"/>
             <path d="M35 56c-16 3-18-10-8-11-5-14 9-18 12-6 12-9 20 3 8 10 7 11-5 19-12 7Z"/>
@@ -95,21 +112,28 @@
       </div>
     </section>
 
+    <!-- Project collection: previews on Home and expandable cards on Projects. -->
     <section class="projects" id="projects" aria-labelledby="projects-heading">
       <div class="section-heading"><p class="eyebrow">02 / SELECTED WORK</p><h2 id="projects-heading">Learning by building.</h2></div>
+      <!-- Responsive grid; copy an article to add another project. -->
       <div class="project-grid">
+        <!-- One card: title, summary, and its project or certificate link. -->
         <article><span class="project-number">01</span><p class="project-tech">PYTHON · API INTEGRATION</p><h3>Weather Lookup</h3><p>Weather conditions, temperature, and humidity for a location using its latitude and longitude, retrieved through an existing API.</p><a class="text-link project-page-link" href="projects.html#project-1">View project details</a></article>
+        <!-- One card: title, summary, and its project or certificate link. -->
         <article><span class="project-number">02</span><p class="project-tech">PYTHON · API INTEGRATION</p><h3>News Headline Finder</h3><p>The top two news headlines for a user-selected topic, gathered with Python and NewsAPI.</p><a class="text-link project-page-link" href="projects.html#project-2">View project details</a></article>
+        <!-- One card: title, summary, and its project or certificate link. -->
         <article><span class="project-number">03</span><p class="project-tech">PYTHON · TURTLE</p><h3>The Shape Series</h3><p>A visual novel project exploring storytelling through Python’s Turtle graphics module.</p><span class="status">In progress</span><a class="text-link project-page-link" href="projects.html#project-3">View project details</a></article>
       </div>
       <a class="button projects-page-link" href="projects.html">View all projects</a>
     </section>
 
+    <!-- Skills are listed as wrapping tags. -->
     <section class="section-row skills" id="skills" aria-labelledby="skills-heading">
       <p class="eyebrow">03 / MY TOOLKIT</p>
       <div><h2 id="skills-heading">Skills I bring to the table.</h2><ul class="skill-list"><li>Python</li><li>C++</li><li>Java</li><li>HTML</li><li>CSS</li><li>GitHub</li><li>API integration</li><li>Python Turtle</li></ul></div>
     </section>
 
+    <!-- Homepage invitation to visit the separate certificates page. -->
     <section class="section-row certificates-preview" id="certificates" aria-labelledby="certificates-heading">
       <p class="eyebrow">04 / CONTINUED LEARNING</p>
       <div>
@@ -118,12 +142,14 @@
         <a class="button certificates-link" href="certificates.html">View my certificates</a>
       </div>
     </section>
+    <!-- Contact invitation and email link. -->
     <section class="contact" id="contact" aria-labelledby="contact-heading">
       <p class="eyebrow">05 / LET’S CONNECT</p><h2 id="contact-heading">Have an opportunity in mind?</h2>
       <p>I’m looking for internships and open to other opportunities to learn and contribute.</p>
       <a class="email" href="mailto:il94@njit.edu">il94@njit.edu</a>
     </section>
   </main>
+  <!-- Copyright notice and site credits. -->
   <footer><p>© 2026 Irene Li</p><p>Built with curiosity, HTML &amp; CSS.</p></footer>
 </body>
 </html>

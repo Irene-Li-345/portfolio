@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Metadata, page title, theme initialization, and shared assets. -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,14 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
+<!-- Visible page content begins here. -->
 <body>
+  <!-- Keyboard shortcut that skips navigation and focuses the main content. -->
   <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Shared site identity, navigation, and theme switch. -->
   <header class="site-header">
     <a class="wordmark" href="index.html" aria-label="Irene Li home">Irene Li<span>.</span></a>
+    <!-- Links between pages and homepage sections; aria-current marks this page. -->
     <nav id="main-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="index.html#about">About</a>
@@ -21,25 +26,48 @@
       <a href="certificates.html">Certificates</a>
       <a href="index.html#contact">Contact</a>
     </nav>
+    <!-- Theme switch; space is reserved while JavaScript prepares it. -->
     <button class="theme-toggle" type="button" aria-pressed="false" hidden>Dark mode</button>
   </header>
+  <!-- Main content can receive focus from the skip link. -->
   <main id="main" tabindex="-1" class="projects-page">
+    <!-- Introduction to the full project collection. -->
     <section class="projects-intro" aria-labelledby="projects-title">
       <p class="eyebrow">SELECTED WORK</p>
       <h1 id="projects-title">My projects.</h1>
       <p class="intro">Exploring ideas through Python, APIs, and interactive storytelling. Take a closer look at what I have built and what I am learning along the way.</p>
     </section>
+    <!-- Project collection: previews on Home and expandable cards on Projects. -->
     <section class="projects" id="projects" aria-labelledby="projects-heading">
       <div class="section-heading"><p class="eyebrow">EXPLORE THE PROJECTS</p><h2 id="projects-heading">Learning by building.</h2></div>
+      <!-- Responsive grid; copy an article to add another project. -->
       <div class="project-grid">
-        <article id="project-1"><span class="project-number">01</span><p class="project-tech">PYTHON · API INTEGRATION</p><h3>Weather Lookup</h3><p>Weather conditions, temperature, and humidity for a location using its latitude and longitude, retrieved through an existing API.</p><button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-details-1" aria-label="Read more about Weather Lookup">Read more <span aria-hidden="true">+</span></button><div class="project-details" id="project-details-1" hidden><div class="project-details-inner"><h4>How it works</h4><p>Users enter a latitude and longitude in the terminal. The Python application uses an OpenWeatherMap API to retrieve weather conditions, temperature, and humidity for that location.</p><h4>Tools and focus</h4><p>Written entirely in Python, this was my first experience using an API. Learning how to use the API was the biggest challenge; working through examples helped me understand how to retrieve weather data.</p></div></div></article>
-        <article id="project-2"><span class="project-number">02</span><p class="project-tech">PYTHON · API INTEGRATION</p><h3>News Headline Finder</h3><p>The top two news headlines for a user-selected topic, gathered with Python and NewsAPI.</p><button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-details-2" aria-label="Read more about News Headline Finder">Read more <span aria-hidden="true">+</span></button><div class="project-details" id="project-details-2" hidden><div class="project-details-inner"><h4>How it works</h4><p>Users enter a news topic in the terminal. The Python application uses NewsAPI to retrieve the top two headlines for that topic, displaying each title, description, and publication date.</p><h4>Tools and focus</h4><p>The biggest challenges were working with <code>cursor.execute</code> and selecting the information to display. This project gave me practice retrieving API data and presenting relevant details in the terminal.</p></div></div></article>
-        <article id="project-3"><span class="project-number">03</span><p class="project-tech">PYTHON · TURTLE</p><h3>The Shape Series</h3><p>A visual novel project exploring storytelling through Python’s Turtle graphics module.</p><span class="status">In progress</span><button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-details-3" aria-label="Read more about The Shape Series">Read more <span aria-hidden="true">+</span></button><div class="project-details" id="project-details-3" hidden><div class="project-details-inner"><h4>The story</h4><p>The plan is for players to choose Triangle, Circle, or Square and follow their day through click-through dialogue. They meet at ShapeCo: Triangle is buying groceries, Square works as a cashier, and Circle is buying the latest edition of The Number Series. A shared love of the books sparks a friendship, ending with the three chatting happily in a café.</p><h4>Planned choices</h4><p>Multiple endings are planned, with some choices leading to an adventure inside The Number Series. Alternate paths are not implemented yet.</p><h4>Progress and next steps</h4><p>The start screen and part of Triangle's storyline are complete. Drawing every scene with Python Turtle has been the biggest challenge. I want to apply what I have learned since starting the project to rework the artwork and improve how players interact with the game.</p></div></div></article>
+        <!-- One card: title, summary, and its project or certificate link. -->
+        <article id="project-1"><span class="project-number">01</span><p class="project-tech">PYTHON · API INTEGRATION</p><h3>Weather Lookup</h3><p>Weather conditions, temperature, and humidity for a location using its latitude and longitude, retrieved through an existing API.</p><!-- Accessible details button controls the matching panel ID. -->
+<button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-details-1" aria-label="Read more about Weather Lookup">Read more <span aria-hidden="true">+</span></button><!-- Collapsed details remain hidden until the project button is activated. -->
+<div class="project-details" id="project-details-1" hidden><div class="project-details-inner"><!-- A short subsection within the expanded project details. -->
+<h4>How it works</h4><p>Users enter a latitude and longitude in the terminal. The Python application uses an OpenWeatherMap API to retrieve weather conditions, temperature, and humidity for that location.</p><!-- A short subsection within the expanded project details. -->
+<h4>Tools and focus</h4><p>Written entirely in Python, this was my first experience using an API. Learning how to use the API was the biggest challenge; working through examples helped me understand how to retrieve weather data.</p></div></div></article>
+        <!-- One card: title, summary, and its project or certificate link. -->
+        <article id="project-2"><span class="project-number">02</span><p class="project-tech">PYTHON · API INTEGRATION</p><h3>News Headline Finder</h3><p>The top two news headlines for a user-selected topic, gathered with Python and NewsAPI.</p><!-- Accessible details button controls the matching panel ID. -->
+<button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-details-2" aria-label="Read more about News Headline Finder">Read more <span aria-hidden="true">+</span></button><!-- Collapsed details remain hidden until the project button is activated. -->
+<div class="project-details" id="project-details-2" hidden><div class="project-details-inner"><!-- A short subsection within the expanded project details. -->
+<h4>How it works</h4><p>Users enter a news topic in the terminal. The Python application uses NewsAPI to retrieve the top two headlines for that topic, displaying each title, description, and publication date.</p><!-- A short subsection within the expanded project details. -->
+<h4>Tools and focus</h4><p>The biggest challenges were working with <code>cursor.execute</code> and selecting the information to display. This project gave me practice retrieving API data and presenting relevant details in the terminal.</p></div></div></article>
+        <!-- One card: title, summary, and its project or certificate link. -->
+        <article id="project-3"><span class="project-number">03</span><p class="project-tech">PYTHON · TURTLE</p><h3>The Shape Series</h3><p>A visual novel project exploring storytelling through Python’s Turtle graphics module.</p><span class="status">In progress</span><!-- Accessible details button controls the matching panel ID. -->
+<button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-details-3" aria-label="Read more about The Shape Series">Read more <span aria-hidden="true">+</span></button><!-- Collapsed details remain hidden until the project button is activated. -->
+<div class="project-details" id="project-details-3" hidden><div class="project-details-inner"><!-- A short subsection within the expanded project details. -->
+<h4>The story</h4><p>The plan is for players to choose Triangle, Circle, or Square and follow their day through click-through dialogue. They meet at ShapeCo: Triangle is buying groceries, Square works as a cashier, and Circle is buying the latest edition of The Number Series. A shared love of the books sparks a friendship, ending with the three chatting happily in a café.</p><!-- A short subsection within the expanded project details. -->
+<h4>Planned choices</h4><p>Multiple endings are planned, with some choices leading to an adventure inside The Number Series. Alternate paths are not implemented yet.</p><!-- A short subsection within the expanded project details. -->
+<h4>Progress and next steps</h4><p>The start screen and part of Triangle's storyline are complete. Drawing every scene with Python Turtle has been the biggest challenge. I want to apply what I have learned since starting the project to rework the artwork and improve how players interact with the game.</p></div></div></article>
       </div>
     </section>
     <a class="text-link" href="index.html#projects">Back to my portfolio</a>
   </main>
+  <!-- Copyright notice and site credits. -->
   <footer><p>&copy; 2026 Irene Li</p><p>Built with curiosity, HTML &amp; CSS.</p></footer>
+  <!-- Attach expandable-card behavior after the page has been parsed. -->
   <script src="projects.js" defer></script>
 </body>
 </html>
