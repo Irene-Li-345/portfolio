@@ -259,16 +259,19 @@ nav, .actions, footer { flex-wrap: wrap; }
 
 /* A larger, fine-stroked script adds a rose accent to the greeting. */
 @font-face {
-  font-family: "Hurricane";
-  src: url("assets/fonts/Hurricane-Regular.ttf") format("truetype");
+  font-family: "Mrs Saint Delafield";
+  src: url("assets/fonts/MrsSaintDelafield-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 .hero h1 .greeting-script {
-  font-family: "Hurricane", "Segoe Script", cursive;
+  font-family: "Mrs Saint Delafield", "Segoe Script", cursive;
   font-weight: 400;
-  font-size: 1.5em;
+  font-size: 1.75em;
+  display: inline-block;
+  transform: skewX(-5deg);
+  transform-origin: bottom center;
   letter-spacing: 0;
   color: #a05d77;
 }
