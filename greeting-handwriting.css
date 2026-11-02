@@ -11,6 +11,9 @@
   font-weight: 400;
   font-size: 1.95em;
   display: inline-block;
+  /* Counter the font's natural rightward slant slightly. */
+  transform: skewX(5deg);
+  transform-origin: bottom center;
   letter-spacing: 0;
   color: #a05d77;
 }
