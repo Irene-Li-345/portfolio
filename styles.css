@@ -256,23 +256,3 @@ nav, .actions, footer { flex-wrap: wrap; }
 .project-grid article { cursor: auto; }
 .projects-page .project-grid article { cursor: pointer; }
 @media (max-width: 700px) { .projects-intro { padding-top: 45px; } }
-
-/* A larger, fine-stroked script adds a rose accent to the greeting. */
-@font-face {
-  font-family: "Mrs Saint Delafield";
-  src: url("assets/fonts/MrsSaintDelafield-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-.hero h1 .greeting-script {
-  font-family: "Mrs Saint Delafield", "Segoe Script", cursive;
-  font-weight: 400;
-  font-size: 1.95em;
-  display: inline-block;
-  transform: skewX(-7deg);
-  transform-origin: bottom center;
-  letter-spacing: 0;
-  color: #a05d77;
-}
-[data-theme="dark"] .hero h1 .greeting-script { color: #e9b0c5; }
