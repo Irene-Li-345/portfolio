@@ -257,11 +257,19 @@ nav, .actions, footer { flex-wrap: wrap; }
 .projects-page .project-grid article { cursor: pointer; }
 @media (max-width: 700px) { .projects-intro { padding-top: 45px; } }
 
-/* Give only the greeting a cursive rose accent without downloading a font. */
-.hero h1 .greeting-script {
-  font-family: "Segoe Script", "Brush Script MT", "Apple Chancery", cursive;
+/* Locally hosted script adds decorative loops to the greeting. */
+@font-face {
+  font-family: "Great Vibes";
+  src: url("assets/fonts/GreatVibes-Regular.ttf") format("truetype");
+  font-style: normal;
   font-weight: 400;
-  letter-spacing: -1px;
+  font-display: swap;
+}
+.hero h1 .greeting-script {
+  font-family: "Great Vibes", "Segoe Script", cursive;
+  font-weight: 400;
+  font-size: 1.18em;
+  letter-spacing: 0;
   color: #975b70;
 }
 [data-theme="dark"] .hero h1 .greeting-script { color: #e8b6c4; }
