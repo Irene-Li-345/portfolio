@@ -268,9 +268,9 @@ nav, .actions, footer { flex-wrap: wrap; }
 .hero h1 .greeting-script {
   font-family: "Mrs Saint Delafield", "Segoe Script", cursive;
   font-weight: 400;
-  font-size: 1.75em;
+  font-size: 1.95em;
   display: inline-block;
-  transform: skewX(-5deg);
+  transform: skewX(-7deg);
   transform-origin: bottom center;
   letter-spacing: 0;
   color: #a05d77;
