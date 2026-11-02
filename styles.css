@@ -257,18 +257,18 @@ nav, .actions, footer { flex-wrap: wrap; }
 .projects-page .project-grid article { cursor: pointer; }
 @media (max-width: 700px) { .projects-intro { padding-top: 45px; } }
 
-/* Locally hosted script adds decorative loops to the greeting. */
+/* A rounded script distinguishes the greeting from the serif heading. */
 @font-face {
-  font-family: "Hurricane";
-  src: url("assets/fonts/Hurricane-Regular.ttf") format("truetype");
+  font-family: "Pacifico";
+  src: url("assets/fonts/Pacifico-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 .hero h1 .greeting-script {
-  font-family: "Hurricane", "Segoe Script", cursive;
+  font-family: "Pacifico", "Segoe Script", cursive;
   font-weight: 400;
-  font-size: 1.3em;
+  font-size: 1em;
   letter-spacing: 0;
   color: #242321;
 }
