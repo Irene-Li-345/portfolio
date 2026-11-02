@@ -30,7 +30,7 @@ Python is optional for a basic browser preview. No npm packages or build command
 ## Notes and acknowledgments
 
 - The site is hosted on GitHub Pages.
-- The Hello greeting uses Pacifico from Google Fonts, hosted locally under the SIL Open Font License. Its license is included in `assets/fonts/Pacifico-OFL.txt`.
+- The Hello greeting uses Hurricane from Google Fonts, hosted locally under the SIL Open Font License. Its license is included in `assets/fonts/Hurricane-OFL.txt`.
 - See [TESTING.md](TESTING.md) for repeatable test cases and recorded results, and [ACCESSIBILITY.md](ACCESSIBILITY.md) for accessibility and Lighthouse checks. Results describe the documented runs and may vary by device or browser.
 - The cat portrait is a temporary placeholder from Unsplash and will be replaced with a personal photo. Its original photographer and source URL should be recorded if the image is retained.
 - The current certificates were issued through LinkedIn Learning. The certificates page can include other providers in the future.
