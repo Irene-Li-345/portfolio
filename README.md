@@ -61,9 +61,11 @@ Keep image alt text descriptive and any future image assets under 500 KB. See `A
 Prepare each new photo before publishing; swapping the source file alone does not optimize it automatically. Install Python and Pillow (`python -m pip install Pillow`), then run from this repository:
 
 ```powershell
-python scripts/optimize_profile.py "C:/path/to/new-photo.jpg"
+python scripts/optimize_profile.py "C:/path/to/new-photo.jpg" --output-dir assets/portrait-20261105
 ```
 
 The script keeps the original intact, corrects EXIF orientation, removes metadata from the generated files, and crops the center to the existing 4:5 portrait shape. It creates `assets/profile-300.webp` (300 x 375), `assets/profile-400.webp` (400 x 500), `assets/profile-600.webp` (600 x 750), and `assets/profile.jpg` (600 x 750 JPEG fallback). Each file must be below 500,000 bytes. Review the central crop; pre-crop the source if needed. Small source images can look soft when enlarged.
 
 The homepage automatically uses these stable filenames and selects a WebP size for the viewport and pixel density. Keep the image's `width="600"`, `height="750"`, and `fetchpriority="high"`. Update the alt text to describe the replacement photo accurately; the script does not change HTML or invent alt text. Preview both desktop and mobile, then commit and push the four generated images and any alt-text change.
+
+The currently displayed portrait files are in assets/portrait-20261105/. Use that output directory when replacing the active portrait, or update the image paths in index.html when creating a new versioned folder.
