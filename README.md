@@ -69,3 +69,7 @@ The script keeps the original intact, corrects EXIF orientation, removes metadat
 The homepage automatically uses these stable filenames and selects a WebP size for the viewport and pixel density. Keep the image's `width="600"`, `height="750"`, and `fetchpriority="high"`. Update the alt text to describe the replacement photo accurately; the script does not change HTML or invent alt text. Preview both desktop and mobile, then commit and push the four generated images and any alt-text change.
 
 The currently displayed portrait files are in assets/portrait-20261105/. Use that output directory when replacing the active portrait, or update the image paths in index.html when creating a new versioned folder.
+
+## Temporarily hidden profile photo
+
+The homepage portrait is temporarily hidden. Its original picture markup remains commented out in `index.html`, and the same optimized photo is preserved in `assets/portrait-20261105/`. To restore it, uncomment that picture block and remove `hero--no-photo` from the hero section. The existing crop and alt text are preserved.

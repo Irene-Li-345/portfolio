@@ -257,3 +257,6 @@ nav, .actions, footer { flex-wrap: wrap; }
 .project-grid article { cursor: auto; }
 .projects-page .project-grid article { cursor: pointer; }
 @media (max-width: 700px) { .projects-intro { padding-top: 45px; } }
+
+/* The photo can be restored without changing its saved crop or image assets. */
+.hero.hero--no-photo { grid-template-columns: minmax(0, 1fr); }
