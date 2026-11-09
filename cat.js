@@ -7,41 +7,49 @@
   cat.className = 'screen-cat';
   cat.hidden = true;
   cat.setAttribute('aria-hidden', 'true');
-  // Four articulated legs, a smaller profile head, and a two-part swaying tail.
-  cat.innerHTML = `<svg class="cat-drawing" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#655e57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-    <ellipse cx="61" cy="85" rx="39" ry="2" fill="#524940" opacity=".12" stroke="none"/>
+  // Orange-tabby companion: rounded face, glossy eyes, white bib and four white paws.
+  cat.innerHTML = `<svg class="cat-drawing" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#34302c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="61" cy="85" rx="40" ry="3" fill="#34302c" opacity=".16" stroke="none"/>
     <g class="cat-body">
+      <!-- Two tail sections sway independently; stripes move with the fur. -->
       <g class="cat-tail">
-        <path d="M35 50C22 49 13 40 10 28" stroke="#aaa298" stroke-width="6"/>
-        <g class="cat-tail-tip"><path d="M10 28C6 18 7 9 13 7" stroke="#aaa298" stroke-width="5"/></g>
+        <path d="M35 51Q17 51 11 28" stroke="#34302c" stroke-width="11"/>
+        <path d="M35 51Q17 51 11 28" stroke="#f4ae50" stroke-width="8"/>
+        <path d="m15 36 6-2M22 45l4-6" stroke="#ca633b" stroke-width="4"/>
+        <g class="cat-tail-tip"><path d="M11 28Q5 13 11 10" stroke="#34302c" stroke-width="10"/><path d="M11 28Q5 13 11 10" stroke="#f4ae50" stroke-width="7"/><path d="m8 21 6-1" stroke="#ca633b" stroke-width="4"/></g>
       </g>
-      <!-- Far-side legs are darker and slightly offset for visible depth. -->
+      <!-- Darker far-side legs remain visible behind the near-side pair. -->
       <g class="cat-leg cat-hind-far" style="--hip-x:43px;--hip-y:54px;--phase:-.47s">
-        <path d="M43 54Q50 60 47 68" stroke="#9a9288" stroke-width="8"/>
-        <g class="cat-shin" style="--knee-x:47px;--knee-y:68px"><path d="M47 68L43 81h6" stroke="#9a9288" stroke-width="5"/></g>
+        <path d="M43 54Q50 60 47 68" stroke="#d68e3e" stroke-width="9"/>
+        <g class="cat-shin" style="--knee-x:47px;--knee-y:68px"><path d="M47 68 46 79" stroke="#d68e3e" stroke-width="7"/><ellipse cx="49" cy="81" rx="6" ry="3.5" fill="#eee9df"/></g>
       </g>
       <g class="cat-leg cat-front-far" style="--hip-x:79px;--hip-y:53px;--phase:-.16s">
-        <path d="M79 53L80 67" stroke="#9a9288" stroke-width="6"/>
-        <g class="cat-shin" style="--knee-x:80px;--knee-y:67px"><path d="M80 67L79 81h6" stroke="#9a9288" stroke-width="5"/></g>
+        <path d="M79 53 80 67" stroke="#d68e3e" stroke-width="8"/>
+        <g class="cat-shin" style="--knee-x:80px;--knee-y:67px"><path d="M80 67 78 79" stroke="#d68e3e" stroke-width="7"/><ellipse cx="81" cy="81" rx="6" ry="3.5" fill="#eee9df"/></g>
       </g>
-      <!-- Long back, soft belly, and small shoulder and haunch contours. -->
-      <path d="M30 48Q32 37 48 38L70 39Q80 37 85 43L92 48Q91 59 83 63L76 64Q63 60 51 62Q36 65 30 56Z" fill="#bdb5aa"/>
-      <path d="M48 59Q63 55 79 60" stroke="#d7d0c5" stroke-width="5"/>
-      <path d="M38 42q-6 6-2 14M77 43q5 4 3 12" stroke="#a69c8f"/>
+      <!-- Plump tabby body, stripes, and the white chest marking from the reference. -->
+      <path d="M30 48Q30 36 46 36L70 38Q87 34 91 48Q95 61 80 66L48 65Q29 65 30 48Z" fill="#f4ae50"/>
+      <path d="M41 38q-3 7 2 11M51 38q-3 7 2 10M60 39q-1 5 3 9" stroke="#ca633b" stroke-width="4"/>
+      <path d="M76 44q13-1 13 8l-9 13-7-4 1-9Z" fill="#fffdf7" stroke="none"/>
+      <path d="M34 54q9-6 16 1" stroke="#ca633b" stroke-width="4"/>
       <g class="cat-leg cat-hind-near" style="--hip-x:37px;--hip-y:54px;--phase:0s">
-        <path d="M37 54Q45 60 42 68" stroke="#bdb5aa" stroke-width="9"/>
-        <g class="cat-shin" style="--knee-x:42px;--knee-y:68px"><path d="M42 68L36 82h7" stroke="#bdb5aa" stroke-width="5.5"/></g>
+        <path d="M37 54Q45 60 42 68" stroke="#f4ae50" stroke-width="11"/>
+        <g class="cat-shin" style="--knee-x:42px;--knee-y:68px"><path d="M42 68 37 80" stroke="#f4ae50" stroke-width="8"/><path d="m39 73 5 2" stroke="#ca633b" stroke-width="3"/><ellipse cx="39" cy="82" rx="7" ry="4" fill="#fffdf7"/><path d="m37 81-1 3m4-3v3" stroke-width=".7"/></g>
       </g>
       <g class="cat-leg cat-front-near" style="--hip-x:84px;--hip-y:53px;--phase:-.31s">
-        <path d="M84 53L85 67" stroke="#bdb5aa" stroke-width="7"/>
-        <g class="cat-shin" style="--knee-x:85px;--knee-y:67px"><path d="M85 67L84 83h7" stroke="#bdb5aa" stroke-width="5.5"/></g>
+        <path d="M84 53 85 67" stroke="#f4ae50" stroke-width="9"/>
+        <g class="cat-shin" style="--knee-x:85px;--knee-y:67px"><path d="M85 67 84 80" stroke="#f4ae50" stroke-width="8"/><path d="m81 72 7 1" stroke="#ca633b" stroke-width="3"/><ellipse cx="87" cy="83" rx="7" ry="4" fill="#fffdf7"/><path d="m85 82-1 3m4-3v3" stroke-width=".7"/></g>
       </g>
       <g class="cat-head">
-        <path d="M81 46L80 26Q80 24 82 26l8 7 7-1 6-8q1-1 1 2l-1 14 7 7-1 5-10 3q-11 1-17-7Z" fill="#bdb5aa"/>
-        <path d="M83 30l1 8 4-3M101 30l-1 7-3-2" fill="#c7a8a7" stroke="none"/>
-        <path d="M94 42q3-2 5 0" stroke="#42493b" stroke-width="1.5"/>
-        <path d="M108 47l3 1-2 3" fill="#8f6b6e" stroke="none"/>
-        <path d="M104 51l4 1M102 49l10-2M102 52l10 2" stroke="#79716a" stroke-width=".6"/>
+        <path d="M66 29Q60 8 67 8q8 0 17 10 12-3 20 0 11-13 14-11 4 5-1 23 5 8 1 17-5 12-25 12-19 0-26-11-6-9-1-19Z" fill="#f4ae50"/>
+        <path d="M67 14q5 1 11 9l-10 5ZM113 14l-4 13 7-3Z" fill="#ef9574" stroke="none"/>
+        <path d="m88 19 1 12m8-13-2 13m9-11-4 9M67 35l8 2m-8 8 7-1m40-8-7 2m8 8-7-2" stroke="#ca633b" stroke-width="3.4"/>
+        <path d="M69 47q7-3 15-8 8-3 13 0 10 7 19 8-7 11-23 11-16 0-24-11Z" fill="#fffdf7" stroke="none"/>
+        <ellipse cx="80" cy="36" rx="6.8" ry="7.6" fill="#242321" stroke="none"/><ellipse cx="105" cy="36" rx="6.8" ry="7.6" fill="#242321" stroke="none"/>
+        <circle cx="78" cy="33" r="2.1" fill="white" stroke="none"/><circle cx="103" cy="33" r="2.1" fill="white" stroke="none"/>
+        <ellipse cx="92" cy="43" rx="3.1" ry="2.1" fill="#e69478"/>
+        <path d="M92 45v3q-4 5-7 1m7-1q4 5 7 1" stroke-width="1.3"/>
+        <path d="m72 45-8-2m8 5-8 2m48-5 7-2m-7 5 7 2" stroke-width="1"/>
       </g>
     </g>
   </svg>`;
