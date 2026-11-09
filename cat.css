@@ -11,26 +11,19 @@
 .screen-cat { position: fixed; left: 0; bottom: 6px; width: 120px; height: 90px; z-index: 30; pointer-events: none; user-select: none; will-change: transform; }
 .screen-cat[hidden] { display: none; }
 .cat-drawing { display: block; width: 100%; height: 100%; overflow: visible; }
-/* Stagger all four shoulders/hips; bend each lower leg during its recovery. */
+/* Smooth single-piece legs swing at staggered intervals, without visible joints. */
 .cat-leg { transform-box: view-box; transform-origin: var(--hip-x) var(--hip-y); }
-.cat-shin { transform-box: view-box; transform-origin: var(--knee-x) var(--knee-y); }
 .cat-tail { transform-box: view-box; transform-origin: 35px 50px; animation: cat-tail-swish 2.4s ease-in-out infinite; }
 .cat-tail-tip { transform-box: view-box; transform-origin: 10px 28px; animation: cat-tail-tip 2.4s ease-in-out -.45s infinite; }
 .is-walking .cat-leg { animation: cat-stride var(--stride, .85s) linear var(--phase) infinite; }
-.is-walking .cat-shin { animation: cat-knee var(--stride, .85s) linear var(--phase) infinite; }
 .is-walking .cat-body { animation: cat-weight-shift var(--stride, .85s) linear infinite; }
 .cat-head { transform-box: view-box; transform-origin: 86px 48px; }
 .is-pouncing .cat-head { transform: rotate(-7deg); }
 .is-pouncing .cat-leg { transform: rotate(-28deg); }
-.is-pouncing .cat-shin { transform: rotate(55deg); }
 @keyframes cat-stride {
-  0%, 100% { transform: rotate(-17deg); }
-  55% { transform: rotate(18deg); }
+  0%, 100% { transform: rotate(-12deg); }
+  55% { transform: rotate(13deg); }
   78% { transform: rotate(3deg); }
-}
-@keyframes cat-knee {
-  0%, 55%, 100% { transform: rotate(0deg); }
-  76% { transform: rotate(34deg); }
 }
 @keyframes cat-weight-shift {
   0%, 50%, 100% { transform: translateY(0); }
