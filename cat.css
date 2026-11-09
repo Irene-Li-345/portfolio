@@ -1,8 +1,11 @@
 /* Keep the companion switch beside the existing theme button. */
 .header-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.cat-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; padding: 9px; border: 0; background: transparent; color: var(--tone); font: 12px Arial, sans-serif; cursor: pointer; }
+.cat-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; padding: 9px; border: 0; background: transparent; color: #a05d77; font: 12px Arial, sans-serif; cursor: pointer; }
 .cat-toggle[hidden] { display: inline-flex; visibility: hidden; }
-.cat-toggle:hover, .cat-toggle[aria-pressed="true"] { color: var(--hover-pink); }
+.cat-toggle:hover, .cat-toggle[aria-pressed="true"] { color: #884760; }
+/* Lighter rose keeps the icon visible against the dark background. */
+[data-theme="dark"] .cat-toggle { color: #e9b0c5; }
+[data-theme="dark"] .cat-toggle:hover, [data-theme="dark"] .cat-toggle[aria-pressed="true"] { color: #f5cfdd; }
 .cat-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; }
 /* The transparent fixed layer never intercepts links or scrolling. */
 .screen-cat { position: fixed; left: 0; bottom: 6px; width: 120px; height: 90px; z-index: 30; pointer-events: none; user-select: none; will-change: transform; }
