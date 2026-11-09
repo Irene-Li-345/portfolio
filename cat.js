@@ -57,7 +57,8 @@
   function setActive(value) {
     active = value;
     button.setAttribute('aria-pressed', String(active));
-    button.textContent = active ? 'Hide cat' : 'Call cat';
+    // Preserve the featureless icon; expose the action through its accessible name.
+    button.title = active ? 'Hide cat companion' : 'Call cat companion';
     button.setAttribute('aria-label', active ? 'Hide cat companion' : 'Call cat companion');
     pointer = null;
     if (reducedMotion.matches) {

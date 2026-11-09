@@ -72,6 +72,6 @@ The currently displayed portrait files are in assets/portrait-20261105/. Use tha
 
 ## Optional cat companion
 
-Click Call cat beside the theme switch to invite a decorative cat in from the bottom-left corner. It patrols the bottom of the viewport and chases and pounces at a nearby mouse pointer. Click Hide cat or press Escape to send it back offscreen. Each page starts with the cat hidden.
+Click the featureless cat-head icon beside the theme switch to invite a decorative cat in from the bottom-left corner. It patrols the bottom of the viewport and chases and pounces at a nearby mouse pointer. Click the cat-head icon again or press Escape to send it back offscreen. Each page starts with the cat hidden.
 
 The original SVG illustration and movement logic live in `cat.js`; `cat.css` handles the controls, responsive header, and walking animation. The cat never intercepts clicks. With reduced motion enabled, the button shows or hides a stationary cat instead. Animation pauses in background tabs. No libraries, image downloads, or external services are required.
