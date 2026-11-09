@@ -7,19 +7,43 @@
   cat.className = 'screen-cat';
   cat.hidden = true;
   cat.setAttribute('aria-hidden', 'true');
-  // A lightweight, original SVG cat faces right; CSS animates its legs and tail.
-  cat.innerHTML = `<svg class="cat-drawing" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#524940" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <ellipse class="cat-shadow" cx="62" cy="84" rx="39" ry="3" fill="#524940" opacity=".12" stroke="none"/>
-    <g class="cat-tail"><path d="M35 55C12 55 7 32 18 27C27 23 31 34 23 38" stroke="#bda99a" stroke-width="10"/><path d="M35 55C12 55 7 32 18 27C27 23 31 34 23 38"/></g>
-    <g class="cat-leg cat-leg-back"><path d="M47 61V79H38" stroke="#bda99a" stroke-width="10"/><path d="M47 61V79H38"/></g>
-    <g class="cat-leg cat-leg-front"><path d="M78 62V79H87" stroke="#bda99a" stroke-width="10"/><path d="M78 62V79H87"/></g>
-    <ellipse cx="57" cy="56" rx="29" ry="19" fill="#d9c8b9"/>
-    <path d="M45 40l-3 9M56 38v10M67 40l2 8" stroke="#b49b88" stroke-width="4"/>
-    <path d="M72 42L69 17L83 25Q91 22 98 26L111 18L109 44Q107 59 91 60Q75 59 72 42Z" fill="#d9c8b9"/>
-    <path d="M74 24l2 12 7-7M105 25l-2 11-5-6" fill="#e9bfc5" stroke="none"/>
-    <ellipse cx="83" cy="41" rx="3" ry="4" fill="#697a55" stroke="none"/><ellipse cx="101" cy="41" rx="3" ry="4" fill="#697a55" stroke="none"/>
-    <path d="M89 47h5l-2.5 3Z" fill="#a46a78" stroke="none"/><path d="M92 50q-4 5-7 1M92 50q4 5 7 1" stroke-width="1.5"/>
-    <path d="M78 48l-10-2M78 52l-10 2M106 48l10-2M106 52l10 2" stroke-width="1.2"/>
+  // Four articulated legs, a smaller profile head, and a two-part swaying tail.
+  cat.innerHTML = `<svg class="cat-drawing" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#655e57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="61" cy="85" rx="39" ry="2" fill="#524940" opacity=".12" stroke="none"/>
+    <g class="cat-body">
+      <g class="cat-tail">
+        <path d="M35 50C22 49 13 40 10 28" stroke="#aaa298" stroke-width="6"/>
+        <g class="cat-tail-tip"><path d="M10 28C6 18 7 9 13 7" stroke="#aaa298" stroke-width="5"/></g>
+      </g>
+      <!-- Far-side legs are darker and slightly offset for visible depth. -->
+      <g class="cat-leg cat-hind-far" style="--hip-x:43px;--hip-y:54px;--phase:-.47s">
+        <path d="M43 54Q50 60 47 68" stroke="#9a9288" stroke-width="8"/>
+        <g class="cat-shin" style="--knee-x:47px;--knee-y:68px"><path d="M47 68L43 81h6" stroke="#9a9288" stroke-width="5"/></g>
+      </g>
+      <g class="cat-leg cat-front-far" style="--hip-x:79px;--hip-y:53px;--phase:-.16s">
+        <path d="M79 53L80 67" stroke="#9a9288" stroke-width="6"/>
+        <g class="cat-shin" style="--knee-x:80px;--knee-y:67px"><path d="M80 67L79 81h6" stroke="#9a9288" stroke-width="5"/></g>
+      </g>
+      <!-- Long back, soft belly, and small shoulder and haunch contours. -->
+      <path d="M30 48Q32 37 48 38L70 39Q80 37 85 43L92 48Q91 59 83 63L76 64Q63 60 51 62Q36 65 30 56Z" fill="#bdb5aa"/>
+      <path d="M48 59Q63 55 79 60" stroke="#d7d0c5" stroke-width="5"/>
+      <path d="M38 42q-6 6-2 14M77 43q5 4 3 12" stroke="#a69c8f"/>
+      <g class="cat-leg cat-hind-near" style="--hip-x:37px;--hip-y:54px;--phase:0s">
+        <path d="M37 54Q45 60 42 68" stroke="#bdb5aa" stroke-width="9"/>
+        <g class="cat-shin" style="--knee-x:42px;--knee-y:68px"><path d="M42 68L36 82h7" stroke="#bdb5aa" stroke-width="5.5"/></g>
+      </g>
+      <g class="cat-leg cat-front-near" style="--hip-x:84px;--hip-y:53px;--phase:-.31s">
+        <path d="M84 53L85 67" stroke="#bdb5aa" stroke-width="7"/>
+        <g class="cat-shin" style="--knee-x:85px;--knee-y:67px"><path d="M85 67L84 83h7" stroke="#bdb5aa" stroke-width="5.5"/></g>
+      </g>
+      <g class="cat-head">
+        <path d="M81 46L80 26Q80 24 82 26l8 7 7-1 6-8q1-1 1 2l-1 14 7 7-1 5-10 3q-11 1-17-7Z" fill="#bdb5aa"/>
+        <path d="M83 30l1 8 4-3M101 30l-1 7-3-2" fill="#c7a8a7" stroke="none"/>
+        <path d="M94 42q3-2 5 0" stroke="#42493b" stroke-width="1.5"/>
+        <path d="M108 47l3 1-2 3" fill="#8f6b6e" stroke="none"/>
+        <path d="M104 51l4 1M102 49l10-2M102 52l10 2" stroke="#79716a" stroke-width=".6"/>
+      </g>
+    </g>
   </svg>`;
   document.body.append(cat);
   button.hidden = false;
@@ -112,6 +136,8 @@
       if (progress >= 1) jumpStart = 0;
       else height = Math.sin(progress * Math.PI) * 48;
     }
+    // Shorter strides at chase speed; all four legs retain staggered footfalls.
+    cat.style.setProperty('--stride', `${speed > 60 ? .5 : .85}s`);
     cat.classList.toggle('is-pouncing', Boolean(jumpStart));
     cat.classList.toggle('is-walking', speed > 0 && !jumpStart);
     draw(height);

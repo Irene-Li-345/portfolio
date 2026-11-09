@@ -192,3 +192,10 @@ Prior Lighthouse accessibility results for all three pages are recorded in ACCES
 - **Steps to run:** Use the cat controls, then select dark mode while watching for uncaught JavaScript errors.
 - **Expected result:** Dark mode still applies, and the interactions produce no uncaught JavaScript errors.
 - **Actual result:** **Pass** in Chrome.
+
+### T26: Four-legged companion gait and tail
+
+- **What is being tested:** Articulated four-leg gait, independent tail movement, and reduced motion.
+- **Steps to run:** Invite the cat and wait for it to walk onscreen. Inspect its four legs and tail over several frames. Enable reduced motion.
+- **Expected result:** Four legs use staggered poses; the tail changes angle independently; reduced motion disables CSS animation. Existing entrance, pounce, and dismissal still work.
+- **Actual result:** **Pass** in Chrome on November 9, 2026. Verified four leg groups, at least three simultaneous leg poses, changing tail transform, and no tail animation with reduced motion. The companion interaction and responsive checks also passed.
