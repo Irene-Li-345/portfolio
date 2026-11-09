@@ -57,11 +57,10 @@
 .cat-sit-pose { display: none; }
 .is-grooming .cat-walk-pose { display: none; }
 .is-grooming .cat-sit-pose { display: inline; }
-.cat-groom-head { transform-box: view-box; transform-origin: 91px 46px; }
-.cat-groom-paw { transform-box: view-box; transform-origin: 76px 69px; }
-.is-grooming .cat-groom-head { animation: cat-lick-nod 1.1s ease-in-out infinite; }
-.is-grooming .cat-groom-paw { animation: cat-paw-wash 1.1s ease-in-out infinite; }
-.is-grooming .cat-tongue { animation: cat-lick .55s ease-in-out infinite; }
-@keyframes cat-lick-nod { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(6deg); } }
-@keyframes cat-paw-wash { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(7deg); } }
-@keyframes cat-lick { 0%, 25%, 100% { opacity: 0; } 40%, 75% { opacity: 1; } }
+/* Slow breathing gives the closed-eye resting pose a quiet idle animation. */
+.cat-sleeping { transform-box: view-box; transform-origin: 76px 80px; }
+.is-grooming .cat-sleeping { animation: cat-sleep-breathe 3.2s ease-in-out infinite; }
+@keyframes cat-sleep-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.025); }
+}
