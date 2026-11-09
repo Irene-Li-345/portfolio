@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="styles.css?v=20261102-greeting-2">
   <!-- Load the greeting separately so older cached site styles cannot hide this update. -->
   <link rel="stylesheet" href="greeting-handwriting.css">
+  <link rel="stylesheet" href="cat.css">
+  <script src="cat.js" defer></script>
 </head>
 <!-- Visible page content begins here. -->
 <body>
@@ -55,7 +57,11 @@
       <a href="#contact">Contact</a>
     </nav>
     <!-- Theme switch; space is reserved while JavaScript prepares it. -->
-    <button class="theme-toggle" type="button" aria-pressed="false" hidden>Dark mode</button>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" aria-pressed="false" hidden>Dark mode</button>
+      <!-- Invite the optional cat; press again or Escape to send it away. -->
+      <button class="cat-toggle" type="button" aria-pressed="false" aria-label="Call cat companion" hidden>Call cat</button>
+    </div>
   </header>
 
   <!-- Main content can receive focus from the skip link. -->
