@@ -69,9 +69,3 @@ The script keeps the original intact, corrects EXIF orientation, removes metadat
 The homepage automatically uses these stable filenames and selects a WebP size for the viewport and pixel density. Keep the image's `width="600"`, `height="750"`, and `fetchpriority="high"`. Update the alt text to describe the replacement photo accurately; the script does not change HTML or invent alt text. Preview both desktop and mobile, then commit and push the four generated images and any alt-text change.
 
 The currently displayed portrait files are in assets/portrait-20261105/. Use that output directory when replacing the active portrait, or update the image paths in index.html when creating a new versioned folder.
-
-## Optional cat companion
-
-Click the featureless cat-head icon beside the theme switch to invite a decorative cat in from the bottom-left corner. It enters along the bottom of the viewport and chases and pounces at a nearby mouse pointer. When the pointer is far away, it settles into a curled, closed-eye sleeping pose with gentle breathing. Bringing the pointer nearby invites it to play again. Click the cat-head icon again or press Escape to send it back offscreen. Each page starts with the cat hidden.
-
-The original SVG illustration and movement logic live in `cat.js`; `cat.css` handles the controls, responsive header, and walking animation. The cat never intercepts clicks. With reduced motion enabled, the button shows or hides a stationary cat instead. Animation pauses in background tabs. No libraries, image downloads, or external services are required.
