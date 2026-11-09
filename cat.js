@@ -11,13 +11,12 @@
   cat.innerHTML = `<svg class="cat-drawing" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#34302c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
     <ellipse cx="61" cy="85" rx="40" ry="3" fill="#34302c" opacity=".16" stroke="none"/>
     <!-- Lower the body to keep the shorter paws on the ground. -->
-    <g transform="translate(0 10)"><g class="cat-body">
-      <!-- Two tail sections sway independently; stripes move with the fur. -->
+    <g class="cat-walk-pose" transform="translate(0 10)"><g class="cat-body">
+      <g transform="translate(16 0) scale(.8 1)">
+      <!-- A short tapered tail has a slim root and a plush rounded tip. -->
       <g class="cat-tail">
-        <path d="M35 51Q17 51 11 28" stroke="#34302c" stroke-width="11"/>
-        <path d="M35 51Q17 51 11 28" stroke="#f4ae50" stroke-width="8"/>
-        <path d="m15 36 6-2M22 45l4-6" stroke="#ca633b" stroke-width="4"/>
-        <g class="cat-tail-tip"><path d="M11 28Q5 13 11 10" stroke="#34302c" stroke-width="10"/><path d="M11 28Q5 13 11 10" stroke="#f4ae50" stroke-width="7"/><path d="m8 21 6-1" stroke="#ca633b" stroke-width="4"/></g>
+        <path d="M35 52C25 53 17 44 15 34Q14 28 19 27Q24 27 25 33C25 42 29 47 35 48Z" fill="#f4ae50"/>
+        <path d="m17 35 7-1m-3 9 5-3" stroke="#ca633b" stroke-width="3"/>
       </g>
       <!-- Darker far-side legs remain visible behind the near-side pair. -->
       <g class="cat-leg cat-hind-far" style="--hip-x:43px;--hip-y:54px;--phase:-.47s">
@@ -49,6 +48,7 @@
         <!-- One outer contour keeps the white sock continuous with the leg. -->
         <path d="M80 53Q87 51 89 55L88 69Q95 68 96 73Q95 76 84 75Q81 75 82 71Z"/>
       </g>
+      </g>
       <g class="cat-head">
         <path d="M66 29Q60 8 67 8q8 0 17 10 12-3 20 0 11-13 14-11 4 5-1 23 5 8 1 17-5 12-25 12-19 0-26-11-6-9-1-19Z" fill="#f4ae50"/>
         <path d="M67 14q5 1 11 9l-10 5ZM113 14l-4 13 7-3Z" fill="#ef9574" stroke="none"/>
@@ -62,6 +62,28 @@
       </g>
     </g></g>
   </svg>`;
+  // Reuse the same face in a separate seated pose, replacing open eyes with lids.
+  const seated = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  seated.setAttribute('class', 'cat-sit-pose');
+  seated.innerHTML = `<path d="M48 76Q29 79 30 65Q30 59 35 60Q39 61 37 65Q37 72 49 70Z" fill="#f4ae50"/>
+    <ellipse cx="62" cy="65" rx="19" ry="20" fill="#f4ae50"/>
+    <path d="M66 48Q83 52 76 73L66 78Q61 66 66 48Z" fill="#fffdf7" stroke="none"/>
+    <path d="m47 58 7 3m-9 5 7 2m-5 6 6 1" stroke="#ca633b" stroke-width="3"/>
+    <path d="M52 69Q40 67 42 79Q43 85 55 84" fill="#f4ae50"/>
+    <path d="M64 65L62 79Q58 80 59 83Q65 87 73 83L74 66" fill="#f4ae50"/>
+    <path d="M61 78Q70 77 72 80L73 83Q65 87 59 83Z" fill="#fffdf7" stroke="none"/>
+    <ellipse cx="50" cy="82" rx="9" ry="4" fill="#fffdf7"/>`;
+  const face = cat.querySelector('.cat-head').cloneNode(true);
+  face.setAttribute('class', 'cat-groom-head');
+  face.querySelectorAll('ellipse[fill="#242321"], circle[fill="white"]').forEach(eye => eye.remove());
+  face.insertAdjacentHTML('beforeend', '<path d="M75 37q5 5 10 0M100 37q5 5 10 0" stroke-width="1.6"/><path class="cat-tongue" d="M91 50q-3 9 1 9t2-9" fill="#e58e9d" stroke-width=".8"/>');
+  const facePosition = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  facePosition.setAttribute('transform', 'translate(-20 3)');
+  facePosition.append(face);
+  seated.append(facePosition);
+  // The raised white paw rocks toward the tongue rather than showing a joint.
+  seated.insertAdjacentHTML('beforeend', '<g class="cat-groom-paw"><path d="M76 71Q84 69 82 61L80 54Q76 49 72 53Q69 56 74 61L73 68Z" fill="#f4ae50"/><path d="M73 60Q67 55 72 52Q76 48 80 54L81 59Z" fill="#fffdf7" stroke="none"/></g>');
+  cat.querySelector('svg').append(seated);
   document.body.append(cat);
   button.hidden = false;
 
@@ -73,6 +95,7 @@
   let jumpStart = 0;
   let lastPounce = -Infinity;
   let pointer = null;
+  let idleSince = 0;
   const width = 120;
 
   // Keep the moving decoration outside the document flow and unable to block clicks.
@@ -89,7 +112,7 @@
 
   function finishExit() {
     cat.hidden = true;
-    cat.classList.remove('is-walking', 'is-pouncing');
+    cat.classList.remove('is-walking', 'is-pouncing', 'is-grooming');
     jumpStart = 0;
     stop();
   }
@@ -102,11 +125,14 @@
     button.title = active ? 'Hide cat companion' : 'Call cat companion';
     button.setAttribute('aria-label', active ? 'Hide cat companion' : 'Call cat companion');
     pointer = null;
+    idleSince = 0;
+    cat.classList.remove('is-grooming');
     if (reducedMotion.matches) {
       stop();
       jumpStart = 0;
-      cat.classList.remove('is-walking', 'is-pouncing');
+      cat.classList.remove('is-walking', 'is-pouncing', 'is-grooming');
       cat.hidden = !active;
+      cat.classList.toggle('is-grooming', active);
       x = 12;
       direction = 1;
       draw();
@@ -127,6 +153,7 @@
     previousTime = time;
     const rightEdge = Math.max(0, window.innerWidth - width);
     let speed = 44;
+    let grooming = false;
     if (!active) {
       direction = -1;
       speed = 120;
@@ -134,6 +161,7 @@
     } else {
       const nearby = pointer && time - pointer.time < 2500 && pointer.y > window.innerHeight - 190 && Math.abs(pointer.x - (x + width / 2)) < 250;
       if (nearby) {
+        idleSince = 0;
         const distance = pointer.x - (x + width / 2);
         if (Math.abs(distance) > 12) direction = Math.sign(distance);
         speed = Math.abs(distance) > 18 ? 100 : 0;
@@ -141,8 +169,16 @@
           jumpStart = time;
           lastPounce = time;
         }
-      } else if (x >= rightEdge) direction = -1;
-      else if (x <= 0) direction = 1;
+      } else {
+        // Finish entering before settling down; approach resumes immediately on interest.
+        if (x >= Math.min(12, rightEdge)) {
+          if (!idleSince) idleSince = time;
+          grooming = time - idleSince > 1600 && !jumpStart;
+          if (grooming) speed = 0;
+        }
+        if (x >= rightEdge) direction = -1;
+        else if (x <= 0) direction = 1;
+      }
     }
     x += direction * speed * dt;
     if (active) x = Math.min(x, rightEdge);
@@ -155,6 +191,7 @@
     }
     // Shorter strides at chase speed; all four seamless legs retain staggered footfalls.
     cat.style.setProperty('--stride', `${speed > 60 ? .5 : .85}s`);
+    cat.classList.toggle('is-grooming', grooming);
     cat.classList.toggle('is-pouncing', Boolean(jumpStart));
     cat.classList.toggle('is-walking', speed > 0 && !jumpStart);
     draw(height);

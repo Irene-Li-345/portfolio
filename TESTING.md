@@ -199,3 +199,10 @@ Prior Lighthouse accessibility results for all three pages are recorded in ACCES
 - **Steps to run:** Invite the cat and wait for it to walk onscreen. Inspect its four legs and tail over several frames. Enable reduced motion.
 - **Expected result:** Four legs use staggered poses; the tail changes angle independently; reduced motion disables CSS animation. Existing entrance, pounce, and dismissal still work.
 - **Actual result:** **Pass** in Chrome on November 9, 2026. Verified four leg groups, at least three simultaneous leg poses, changing tail transform, and no tail animation with reduced motion. The companion interaction and responsive checks also passed.
+
+### T27: Sitting and paw grooming when the cursor is far away
+
+- **What is being tested:** Idle grooming, closed eyes, and return to cursor interaction.
+- **Steps to run:** Invite the cat, keep the pointer away for about six seconds, then bring it near the bottom edge beside the cat. Move the pointer far away again. Enable reduced motion and dismiss the cat with Escape.
+- **Expected result:** The cat finishes entering, sits with closed eyes, and animates its raised paw and tongue. A nearby pointer interrupts grooming; distance triggers sitting again. Reduced motion suppresses the animation, and Escape still dismisses the cat.
+- **Actual result:** **Pass** in Chrome on November 9, 2026. Verified grooming state, closed-eye markup, paw animation, both cursor transitions, reduced-motion suppression, and dismissal without browser errors.
