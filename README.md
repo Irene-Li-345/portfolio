@@ -73,3 +73,9 @@ The currently displayed portrait files are in assets/portrait-20261105/. Use tha
 ## Temporarily hidden profile photo
 
 The homepage portrait is temporarily hidden. Its original picture markup remains commented out in `index.html`, and the same optimized photo is preserved in `assets/portrait-20261105/`. To restore it, uncomment that picture block and remove `hero--no-photo` from the hero section. The existing crop and alt text are preserved.
+
+## Idle flower blooms
+
+The five-petal flower button to the left of the theme switch enables idle-pointer flowers. Rest the mouse or pen in one position for two seconds: a bud appears there and its petals unfurl into a five-petal flower. Moving more than a few pixels fades the old flower and starts a fresh two-second wait. Only one flower blooms per resting position. Click the button again or press Escape to disable it.
+
+The normal cursor is preserved and decorations cannot intercept clicks. Scrolling, resizing, leaving the page, or switching to keyboard navigation clears pending flowers. Touch scrolling does not trigger blooms. Reduced-motion settings show a static open flower after the same delay. Artwork and timing live in `idle-flowers.js`; styling and unfurl animations live in `idle-flowers.css`.

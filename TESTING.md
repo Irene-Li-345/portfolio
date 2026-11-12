@@ -173,3 +173,17 @@ Prior Lighthouse accessibility results for all three pages are recorded in ACCES
 - **Actual result:** **Pass** in Chrome. Verified flourish completion, gradient animation, solid body background, responsive widths, and static reduced-motion styles.
 
 Note: The hero gradient motion was removed at the user's request after T22. The hero now uses its static gradient; the greeting flourish remains a one-time animation with a thicker, looped stroke. The gradient-motion expectation in the historical T22 run no longer applies.
+
+### T23: Two-second idle flower blooms
+
+- **What is being tested:** Flower button, idle timer, bud unfurling, and cleanup.
+- **Steps to run:** On each page, enable the flower button. Move the pointer and hold it still. Check before two seconds, then wait for the bloom to finish. Continue waiting, move away, and press Escape.
+- **Expected result:** No early bloom; one bud unfurls into five petals after two seconds. The center appears and the bud disappears. No repeated bloom at the same position. Movement fades the flower; Escape disables and clears the effect.
+- **Actual result:** **Pass** in Chrome on November 12, 2026 on all three pages. Verified timing, five petals, final bud/center opacity, single bloom, movement cleanup, Escape, and no script errors.
+
+### T24: Idle blooms responsive layout and reduced motion
+
+- **What is being tested:** Control placement, click-through artwork, and motion preference.
+- **Steps to run:** Check all pages at widths 320, 390, 768, and 1200 pixels. Enable reduced motion, then trigger an idle bloom and disable it.
+- **Expected result:** Flower button stays left of the theme switch without horizontal overflow. Decorations do not intercept pointer events. Reduced motion shows a static open flower with no bud/unfurl animation. Disabling clears it immediately.
+- **Actual result:** **Pass** in Chrome across the listed widths, with reduced-motion emulation.
