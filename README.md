@@ -73,3 +73,9 @@ The currently displayed portrait files are in assets/portrait-20261105/. Use tha
 ## Temporarily hidden profile photo
 
 The homepage portrait is temporarily hidden. Its original picture markup remains commented out in `index.html`, and the same optimized photo is preserved in `assets/portrait-20261105/`. To restore it, uncomment that picture block and remove `hero--no-photo` from the hero section. The existing crop and alt text are preserved.
+
+## Optional lotus garden
+
+The five-petal flower icon to the left of the theme button toggles watercolor-style lotus blooms in the two bottom corners. With a mouse, enabling it also replaces the pointer with a dragonfly whose wings flutter rapidly. Click the flower again or press Escape to turn the effect off. Each page starts with it disabled.
+
+`garden.js` contains the original SVG artwork and toggle/cursor behavior; `garden.css` handles the bloom and wing animations. The artwork cannot intercept clicks. Touch devices retain normal touch interaction without a dragonfly. Reduced motion keeps the flowers static and retains the native cursor. Leaving the page or using keyboard navigation restores the native cursor.

@@ -173,3 +173,26 @@ Prior Lighthouse accessibility results for all three pages are recorded in ACCES
 - **Actual result:** **Pass** in Chrome. Verified flourish completion, gradient animation, solid body background, responsive widths, and static reduced-motion styles.
 
 Note: The hero gradient motion was removed at the user's request after T22. The hero now uses its static gradient; the greeting flourish remains a one-time animation with a thicker, looped stroke. The gradient-motion expectation in the historical T22 run no longer applies.
+
+## Lotus garden checks - November 12, 2026
+
+### T23: Flower control and corner blooms
+
+- **What is being tested:** Five-petal button positioning and garden toggle on all pages.
+- **Steps to run:** Open Home, Projects, and Certificates at 320, 390, 768, and 1200 pixels wide. Check the flower icon, activate it with Enter, then press Escape.
+- **Expected result:** Five petals, button left of and aligned with the theme switch, no horizontal overflow. Both corner lotuses show on activation and disappear on Escape.
+- **Actual result:** **Pass** in Chrome for all listed pages and widths.
+
+### T24: Dragonfly cursor and click-through behavior
+
+- **What is being tested:** Mouse cursor replacement, wing animation, and normal link/button interaction.
+- **Steps to run:** Activate the garden and move the mouse. Click the theme switch, then dismiss the garden.
+- **Expected result:** The dragonfly follows the pointer with flapping wings. Both decorative layers use pointer-events none, the theme button still works, and dismissal restores the native cursor.
+- **Actual result:** **Pass** in Chrome. Pointer tracking, cursor restoration, and theme switching worked without script errors.
+
+### T25: Touch and reduced-motion alternatives
+
+- **What is being tested:** Accessible motion and input fallbacks.
+- **Steps to run:** Enable reduced motion while the garden is active. Move the pointer, then toggle off. In a touch-enabled mobile context, tap the flower button.
+- **Expected result:** Reduced motion disables bloom/wing animation and retains the native cursor. Touch shows lotuses without a dragonfly.
+- **Actual result:** **Pass** in Chrome with reduced-motion emulation and a touch-enabled mobile context.

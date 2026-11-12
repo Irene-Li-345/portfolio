@@ -1,0 +1,37 @@
+/* Five peach petals share the theme button's normal and hover colors. */
+.garden-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.garden-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 4px; border: 0; background: transparent; color: var(--accent); cursor: pointer; }
+.garden-toggle[hidden] { visibility: hidden; }
+.garden-toggle:hover, .garden-toggle[aria-pressed="true"] { color: var(--hover-pink); }
+.garden-toggle svg { display: block; width: 34px; height: 34px; }
+.garden-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 3px; border-radius: 50%; }
+.lotus-garden { position: fixed; inset: 0; z-index: 20; pointer-events: none; user-select: none; overflow: hidden; }
+.lotus-garden[hidden], .dragonfly-cursor[hidden] { display: none; }
+.lotus-corner { position: absolute; bottom: -9px; width: clamp(120px, 18vw, 230px); }
+.lotus-left { left: -14px; }
+.lotus-right { right: -14px; transform: scaleX(-1); }
+.lotus-corner svg { display: block; width: 100%; height: auto; }
+.lotus-petal { transform-box: view-box; transform-origin: 120px 164px; animation: lotus-bloom 1.5s cubic-bezier(.2,.7,.3,1) both; }
+.petal-middle { animation-delay: .12s; }
+.petal-center { animation-delay: .24s; }
+.petal-front { animation-delay: .36s; }
+@keyframes lotus-bloom { from { opacity: 0; transform: scale(.15, .35); } to { transform: scale(1); } }
+/* The visual pointer tracks native coordinates but never receives input. */
+.dragonfly-cursor { position: fixed; top: 0; left: 0; width: 60px; height: 60px; z-index: 1000; pointer-events: none; }
+.dragonfly-cursor svg { display: block; width: 100%; height: 100%; }
+.dragonfly-active, .dragonfly-active * { cursor: none !important; }
+.dragonfly-wing { transform-box: view-box; transform-origin: 40px 33px; animation: dragonfly-flutter .075s ease-in-out infinite alternate; }
+.wing-right { animation-direction: alternate-reverse; }
+@keyframes dragonfly-flutter { from { transform: scaleX(1) rotate(-5deg); } to { transform: scaleX(.32) rotate(5deg); } }
+.garden-paused .dragonfly-wing { animation-play-state: paused; }
+@media (min-width: 701px) and (max-width: 1100px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header .wordmark { order: 1; }
+  .garden-controls { order: 2; margin-left: auto; }
+  .site-header nav { order: 3; width: 100%; }
+}
+@media (max-width: 700px) { .garden-controls { grid-column: 2; grid-row: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .lotus-petal, .dragonfly-wing { animation: none; }
+  .dragonfly-cursor { display: none; }
+}
