@@ -39,3 +39,8 @@
 @keyframes bee-flutter { from { transform: scaleY(1) rotate(-7deg); } to { transform: scaleY(.3) rotate(7deg); } }
 @keyframes pollen-fall { from { opacity: .95; transform: translate(0, 0); } to { opacity: 0; transform: translate(var(--drift), 55px); } }
 @media (prefers-reduced-motion: reduce) { .fluffy-bee, .bee-pollen { display: none; } }
+
+/* Remain visible after the second visit, then finish fading at two seconds. */
+.idle-flower.is-pollinated-out { animation: pollinated-flower-fade 2s ease forwards; }
+@keyframes pollinated-flower-fade { 0%, 65% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .idle-flower.is-pollinated-out { animation: none; } }

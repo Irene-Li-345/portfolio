@@ -196,3 +196,10 @@ Note: The hero gradient motion was removed at the user's request after T22. The 
 - **Actual result:** **Pass** in Chrome on November 12, 2026. Six blooms persisted; no early bees appeared. Observed visit counts of one and two, pollen particles, flower removal at two, bee exit and particle cleanup. New blooms and Escape cleanup passed without script errors; reduced-motion flowers were static with no bees.
 
 The persistent-flower behavior replaces T23's earlier expectation that movement fades a flower. Movement now resets only the next bloom timer; flowers remain until pollinated twice or the effect is disabled.
+
+### T26: Varied flowers and slower bees
+
+- **What is being tested:** Flower variation, larger centers, and the complete pollination cycle after slowing flight.
+- **Steps to run:** Create six flowers at different pointer positions. Inspect petal/leaf counts and flower centers, then let the bees finish their routes.
+- **Expected result:** Blooms vary from 5-8 petals and 1-3 leaves with subtle pink shades. Centers are larger and contain 15 dark spots. Bees move more slowly, complete two-flower routes, and flowers disappear after their second landing with a two-second removal timer.
+- **Actual result:** **Pass** in Chrome on November 12, 2026 for varied petal/leaf counts, enlarged spotted centers, complete slower bee routes, two-visit removal, pollen cleanup, Escape, and reduced motion. The configured removal timer is 2,000 ms, with the final part used for fading; a separate precise elapsed-time measurement was not completed.
