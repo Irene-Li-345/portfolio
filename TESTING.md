@@ -162,3 +162,12 @@ Prior Lighthouse accessibility results for all three pages are recorded in ACCES
 - **Steps to run:** Use a fresh Chrome instance with extensions disabled. Run Lighthouse on Home, Projects, and Certificates and inspect console errors and the Issues audit.
 - **Expected result:** No missing favicon, uncaught console error, or CSP issue from the site.
 - **Actual result:** **Pass** for the local optimized pages. All three desktop audits returned no console errors or Issues entries and scored 100 for Best Practices. The supplied report's CSP warning and external font request did not reproduce in the clean live baseline either.
+
+## Decorative motion checks - November 12, 2026
+
+### T22: Greeting flourish and hero gradient
+
+- **What is being tested:** One-time SVG drawing and slow gradient movement without layout changes.
+- **Steps to run:** Open Home, wait for the underline to finish, and observe the hero gradient. Check widths 320, 390, 768, and 1200 pixels. Enable reduced motion.
+- **Expected result:** The flourish draws once beneath hello and stays visible. Only the hero gradient moves; the page background remains solid. No horizontal overflow occurs. Reduced motion disables both animations.
+- **Actual result:** **Pass** in Chrome. Verified flourish completion, gradient animation, solid body background, responsive widths, and static reduced-motion styles.
