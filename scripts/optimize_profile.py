@@ -29,7 +29,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path, help="Replacement portrait (cropped centrally to 4:5)")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "assets")
+    parser.add_argument("--zoom", type=float, default=1.0, help="Crop zoom factor (default: 1.0)")
     args = parser.parse_args()
+    if args.zoom < 1:
+        parser.error("--zoom must be at least 1")
     # Protect the original from being overwritten by generated filenames.
     names = ("profile.jpg", "profile-300.webp", "profile-400.webp", "profile-600.webp")
     if args.source.resolve() in [(args.output_dir / name).resolve() for name in names]:
@@ -41,7 +44,13 @@ def main():
         rgba = source.convert("RGBA")
         background = Image.new("RGBA", rgba.size, "#fffcf7")
         background.alpha_composite(rgba)
-        portrait = ImageOps.fit(background.convert("RGB"), (600, 750), method=Image.Resampling.LANCZOS)
+        portrait = ImageOps.fit(
+            background.convert("RGB"),
+            (600, 750),
+            method=Image.Resampling.LANCZOS,
+            centering=(0.5, 0.5),
+            bleed=min(0.499, (1 - 1 / args.zoom) / 2),
+        )
     # Create responsive WebP sizes and a full-size JPEG fallback in memory.
     outputs = {
         "profile.jpg": encode(portrait, "JPEG"),

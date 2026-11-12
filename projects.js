@@ -22,7 +22,7 @@ document.querySelectorAll('.project-toggle').forEach(button => {
     icon.textContent = opening ? '−' : '+';
     button.append(icon);
     // Reveal the panel for measurement; prevent interaction while it closes.
-    panel.hidden = false;
+    panel.hidden = false; 
     panel.inert = !opening;
     const endHeight = opening ? panel.scrollHeight : 0;
     // Skip motion when requested or when the browser lacks animation support.
