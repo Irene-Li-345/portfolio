@@ -171,3 +171,5 @@ Prior Lighthouse accessibility results for all three pages are recorded in ACCES
 - **Steps to run:** Open Home, wait for the underline to finish, and observe the hero gradient. Check widths 320, 390, 768, and 1200 pixels. Enable reduced motion.
 - **Expected result:** The flourish draws once beneath hello and stays visible. Only the hero gradient moves; the page background remains solid. No horizontal overflow occurs. Reduced motion disables both animations.
 - **Actual result:** **Pass** in Chrome. Verified flourish completion, gradient animation, solid body background, responsive widths, and static reduced-motion styles.
+
+Note: The hero gradient motion was removed at the user's request after T22. The hero now uses its static gradient; the greeting flourish remains a one-time animation with a thicker, looped stroke. The gradient-motion expectation in the historical T22 run no longer applies.

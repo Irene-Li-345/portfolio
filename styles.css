@@ -265,15 +265,3 @@ nav, .actions, footer { flex-wrap: wrap; }
 .status { border-radius: 999px; }
 .skip-link { border-radius: 12px; }
 .certificates-preview, .certificates-intro, .projects-intro { border-radius: 24px; }
-
-/* Slowly move only the hero's existing pastel gradient; the page stays solid. */
-.hero {
-  background-size: 180% 180%;
-  background-position: 0% 40%;
-  animation: hero-gradient-drift 22s ease-in-out infinite alternate;
-}
-@keyframes hero-gradient-drift {
-  from { background-position: 0% 40%; }
-  to { background-position: 100% 60%; }
-}
-@media (prefers-reduced-motion: reduce) { .hero { animation: none; } }
