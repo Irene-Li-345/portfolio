@@ -44,3 +44,7 @@
 .idle-flower.is-pollinated-out { animation: pollinated-flower-fade 2s ease forwards; }
 @keyframes pollinated-flower-fade { 0%, 65% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .idle-flower.is-pollinated-out { animation: none; } }
+
+/* Detached petals drift in page space while the viewport clips them naturally. */
+.scattered-petal { position: absolute; top: 0; left: 0; width: 17px; height: 25px; border-radius: 80% 15% 75% 25%; box-shadow: inset 0 0 0 1px #bc8ba033; pointer-events: none; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .scattered-petal { display: none; } }

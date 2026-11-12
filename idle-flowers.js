@@ -18,12 +18,20 @@
   let bees = [];
   let flightFrame = 0;
   let waveTimer;
+  let petals = [];
+  let petalFrame = 0;
+  let petalTime = 0;
+  let scrollFrame = 0;
+  let lastTap = null;
 
   // Bees work in small waves: each visits two different flowers, then leaves.
   function startBees() {
     if (!enabled || reduced.matches || document.hidden || bees.length || flowers.length <= 5) return;
-    const available = flowers.filter(f => f.node.isConnected && !f.retiring && f.ready <= performance.now());
-    if (available.length < 6) { waveTimer = setTimeout(startBees, 700); return; }
+    const available = flowers.filter(f => f.node.isConnected && !f.retiring && f.ready <= performance.now() && f.y - scrollY > 30 && f.y - scrollY < innerHeight - 30);
+    if (available.length < 6) {
+      if (flowers.some(f => f.ready > performance.now())) waveTimer = setTimeout(startBees, 700);
+      return;
+    }
     available.sort((a, b) => a.visits - b.visits || a.id - b.id);
     for (let i = 0; i < 3; i++) {
       const node = document.createElement('div');
@@ -48,7 +56,8 @@
 
   function beginFlight(bee, target, now) {
     bee.fromX = bee.x; bee.fromY = bee.y;
-    bee.toX = target.x; bee.toY = target.y - 12;
+    bee.toX = target.node ? target.x - scrollX : target.x;
+    bee.toY = target.node ? target.y - scrollY - 12 : target.y - 12;
     bee.start = now;
     bee.duration = Math.max(2000, Math.min(4200, Math.hypot(bee.toX - bee.x, bee.toY - bee.y) * 6));
     bee.stage = 'fly';
@@ -73,9 +82,12 @@
       if (flower.visits >= 2) {
         flower.retiring = true;
         flower.node.classList.add('is-pollinated-out');
-        const cleanup = setTimeout(() => { flower.node.remove(); cleanupTimers.delete(cleanup); }, 2000);
+        const cleanup = setTimeout(() => {
+          flower.node.remove();
+          flowers = flowers.filter(f => f !== flower);
+          cleanupTimers.delete(cleanup);
+        }, 2000);
         cleanupTimers.add(cleanup);
-        flowers = flowers.filter(f => f !== flower);
       }
     }
     bee.pollen = true;
@@ -121,6 +133,9 @@
   function clearFlowers() {
     clearTimeout(timer);
     stopBees();
+    cancelAnimationFrame(petalFrame); petalFrame = 0; petalTime = 0;
+    cancelAnimationFrame(scrollFrame); scrollFrame = 0;
+    petals = [];
     flowers = [];
     cleanupTimers.forEach(clearTimeout);
     cleanupTimers.clear();
@@ -133,6 +148,8 @@
     hasBloomed = true;
     const flower = document.createElement('div');
     flower.className = 'idle-flower';
+    const documentX = point.x + scrollX;
+    const documentY = point.y + scrollY;
     flower.style.left = `${point.x}px`;
     flower.style.top = `${point.y}px`;
     const id = `idle-petal-${++flowerNumber}`;
@@ -157,8 +174,66 @@
     </svg>`;
     flower.dataset.visits = '0';
     layer.append(flower);
-    flowers.push({ node: flower, x: point.x, y: point.y, visits: 0, id: flowerNumber, ready: performance.now() + 2050 });
+    flowers.push({ node: flower, x: documentX, y: documentY, visits: 0, id: flowerNumber, pink, petalCount, ready: performance.now() + 2050 });
     if (flowers.length > 5) { clearTimeout(waveTimer); startBees(); }
+  }
+
+  // Keep document coordinates while drawing in a click-through viewport layer.
+  function renderFlowers() {
+    scrollFrame = 0;
+    for (const flower of [...flowers]) {
+      const y = flower.y - scrollY;
+      if (y <= 0 && !flower.retiring) burst(flower);
+      else {
+        flower.node.style.top = `${y}px`;
+        flower.node.style.left = `${flower.x - scrollX}px`;
+      }
+    }
+    renderPetals();
+  }
+
+  function burst(flower) {
+    flower.retiring = true;
+    flower.node.remove();
+    flowers = flowers.filter(f => f !== flower);
+    if (reduced.matches) return;
+    // Detached petals retain page coordinates, allowing the user to follow them down.
+    for (let i = 0; i < flower.petalCount; i++) {
+      const node = document.createElement('span');
+      node.className = 'scattered-petal';
+      node.style.background = `radial-gradient(ellipse at 35% 30%, #fff1f6, ${flower.pink} 70%, #c1819c)`;
+      layer.append(node);
+      petals.push({ node, x: flower.x, y: Math.max(flower.y, scrollY + 8), vx: (i - (flower.petalCount - 1) / 2) * 20, vy: -12 - Math.random() * 28, drift: Math.random() * Math.PI * 2, turn: Math.random() * 360, age: 0 });
+    }
+    while (petals.length > 140) petals.shift().node.remove();
+    if (!petalFrame && !document.hidden) petalFrame = requestAnimationFrame(fall);
+  }
+
+  function renderPetals() {
+    for (const petal of petals) {
+      petal.node.style.transform = `translate3d(${petal.x - scrollX + Math.sin(petal.age * 2 + petal.drift) * 18}px, ${petal.y - scrollY}px, 0) rotate(${petal.turn + petal.age * 35}deg)`;
+    }
+  }
+
+  function fall(now) {
+    petalFrame = 0;
+    if (!enabled || document.hidden || reduced.matches) return;
+    const dt = petalTime ? Math.min((now - petalTime) / 1000, .05) : 0;
+    petalTime = now;
+    const bottom = document.documentElement.scrollHeight - 15;
+    for (const petal of petals) {
+      petal.age += dt;
+      petal.vx *= Math.exp(-dt * 1.5);
+      petal.vy = Math.min(85, petal.vy + 35 * dt);
+      petal.x = Math.max(10, Math.min(innerWidth - 25, petal.x + petal.vx * dt));
+      petal.y += petal.vy * dt;
+      petal.node.style.opacity = String(Math.min(1, Math.max(0, (bottom - petal.y) / 75), Math.max(0, 65 - petal.age)));
+      if (petal.y >= bottom || petal.age >= 65) { petal.done = true; petal.node.remove(); }
+    }
+    petals = petals.filter(petal => !petal.done);
+    renderPetals();
+    if (petals.length) petalFrame = requestAnimationFrame(fall);
+    else petalTime = 0;
   }
 
   function arm() {
@@ -171,6 +246,7 @@
     enabled = value;
     clearFlowers();
     hasBloomed = false;
+    lastTap = null;
     button.setAttribute('aria-pressed', String(enabled));
     button.setAttribute('aria-label', enabled ? 'Disable idle flower blooms' : 'Enable idle flower blooms');
     button.title = enabled ? 'Disable idle flower blooms' : 'Enable idle flower blooms';
@@ -186,14 +262,45 @@
       arm();
     }
   }, { passive: true });
-  function reset() { point = null; hasBloomed = false; clearTimeout(timer); }
+  // Recognize a double tap without cancelling normal touch scrolling or link actions.
+  let touchStart = null;
+  window.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'touch') touchStart = { x: event.clientX, y: event.clientY, time: performance.now() };
+  }, { passive: true });
+  window.addEventListener('pointerup', event => {
+    if (event.pointerType !== 'touch' || !enabled || !touchStart) return;
+    const start = touchStart; touchStart = null;
+    if (event.target.closest('a, button, input, textarea, select, label') || performance.now() - start.time > 450 || Math.hypot(event.clientX - start.x, event.clientY - start.y) > 15) { lastTap = null; return; }
+    const tap = { x: event.clientX, y: event.clientY, time: performance.now() };
+    if (lastTap && tap.time - lastTap.time < 350 && Math.hypot(tap.x - lastTap.x, tap.y - lastTap.y) < 25) {
+      clearTimeout(timer); point = { x: tap.x, y: tap.y }; hasBloomed = false;
+      bloom(); lastTap = null;
+    } else lastTap = tap;
+  }, { passive: true });
+  window.addEventListener('pointercancel', () => { touchStart = null; lastTap = null; }, { passive: true });
+  function reset() { point = null; hasBloomed = false; lastTap = null; clearTimeout(timer); }
   button.addEventListener('click', () => toggle(!enabled));
-  document.documentElement.addEventListener('pointerleave', reset);
+  document.documentElement.addEventListener('pointerleave', event => { if (event.pointerType !== 'touch') reset(); });
   window.addEventListener('blur', reset);
-  window.addEventListener('scroll', reset, { passive: true });
+  window.addEventListener('scroll', () => {
+    reset();
+    if (!enabled) return;
+    // Bees choose fresh, visible targets once scrolling settles.
+    stopBees();
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(renderFlowers);
+    waveTimer = setTimeout(startBees, 300);
+  }, { passive: true });
   window.addEventListener('resize', () => { reset(); clearFlowers(); });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) { reset(); stopBees(); } else startBees(); });
-  reduced.addEventListener('change', () => { if (reduced.matches) stopBees(); else startBees(); });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { reset(); stopBees(); cancelAnimationFrame(petalFrame); petalFrame = 0; petalTime = 0; }
+    else { startBees(); if (petals.length && !petalFrame) petalFrame = requestAnimationFrame(fall); }
+  });
+  reduced.addEventListener('change', () => {
+    if (reduced.matches) {
+      stopBees(); cancelAnimationFrame(petalFrame); petalFrame = 0; petalTime = 0;
+      petals.forEach(petal => petal.node.remove()); petals = [];
+    } else startBees();
+  });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') toggle(false);
     else if (event.key === 'Tab') reset();

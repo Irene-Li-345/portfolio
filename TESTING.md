@@ -203,3 +203,17 @@ The persistent-flower behavior replaces T23's earlier expectation that movement 
 - **Steps to run:** Create six flowers at different pointer positions. Inspect petal/leaf counts and flower centers, then let the bees finish their routes.
 - **Expected result:** Blooms vary from 5-8 petals and 1-3 leaves with subtle pink shades. Centers are larger and contain 15 dark spots. Bees move more slowly, complete two-flower routes, and flowers disappear after their second landing with a two-second removal timer.
 - **Actual result:** **Pass** in Chrome on November 12, 2026 for varied petal/leaf counts, enlarged spotted centers, complete slower bee routes, two-visit removal, pollen cleanup, Escape, and reduced motion. The configured removal timer is 2,000 ms, with the final part used for fading; a separate precise elapsed-time measurement was not completed.
+
+### T27: Scroll-anchored flowers and petal bursts
+
+- **What is being tested:** Document anchoring, top-edge burst, falling petal paths, and cleanup.
+- **Steps to run:** Bloom a flower at a visible cursor position. Scroll down 200 pixels, then scroll until its center crosses the viewport top. Wait for the petals to fall and continue scrolling. Press Escape.
+- **Expected result:** Flower position shifts by the scroll amount instead of sticking to the viewport. It bursts into 3-7 detached petals at the top. Their document coordinates advance as they float, remaining continuous while scrolling. Escape clears all particles.
+- **Actual result:** **Pass** in Chrome on November 12, 2026. Verified a 200-pixel positional shift, flower removal and matching petal count, downward travel, document-coordinate continuity, and cleanup.
+
+### T28: Double-tap mobile blooms
+
+- **What is being tested:** Touch input and reduced-motion alternative.
+- **Steps to run:** In a touch-enabled mobile browser, enable the flower effect. Single-tap a non-interactive area, then double-tap it. Enable reduced motion and scroll the flower past the top.
+- **Expected result:** Single tap does not bloom; double tap blooms immediately. Touch pointer-leave events do not cancel the gesture. With reduced motion, crossing the top removes the flower without moving petals.
+- **Actual result:** **Pass** in Chrome with mobile touch emulation. Verified single/double tap distinction, bloom, and reduced-motion removal without script errors.
