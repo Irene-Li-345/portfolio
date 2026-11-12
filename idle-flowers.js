@@ -13,9 +13,115 @@
   let hasBloomed = false;
   let flowerNumber = 0;
   const cleanupTimers = new Set();
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let flowers = [];
+  let bees = [];
+  let flightFrame = 0;
+  let waveTimer;
+
+  // Bees work in small waves: each visits two different flowers, then leaves.
+  function startBees() {
+    if (!enabled || reduced.matches || document.hidden || bees.length || flowers.length <= 5) return;
+    const available = flowers.filter(f => f.node.isConnected && !f.retiring && f.ready <= performance.now());
+    if (available.length < 6) { waveTimer = setTimeout(startBees, 700); return; }
+    available.sort((a, b) => a.visits - b.visits || a.id - b.id);
+    for (let i = 0; i < 3; i++) {
+      const node = document.createElement('div');
+      node.className = 'fluffy-bee';
+      const id = `bee-fuzz-${flowerNumber}-${i}`;
+      // No separate head: a fuzzy striped oval, curly antennae and fluttering wings.
+      node.innerHTML = `<svg viewBox="0 0 76 62" xmlns="http://www.w3.org/2000/svg">
+        <defs><clipPath id="${id}-body"><ellipse cx="38" cy="36" rx="22" ry="15"/></clipPath><filter id="${id}" x="-20%" y="-25%" width="140%" height="150%"><feTurbulence type="fractalNoise" baseFrequency=".35" numOctaves="2" seed="5" result="fuzz"/><feDisplacementMap in="SourceGraphic" in2="fuzz" scale="2"/></filter></defs>
+        <g class="bee-wings" fill="#e8f1ec" fill-opacity=".8" stroke="#a5bdb2" stroke-width=".8"><ellipse class="bee-wing" cx="28" cy="20" rx="8" ry="17" transform="rotate(-28 28 20)"/><ellipse class="bee-wing" cx="46" cy="19" rx="8" ry="17" transform="rotate(25 46 19)"/></g>
+        <g filter="url(#${id})"><ellipse cx="38" cy="36" rx="22" ry="15" fill="#ecc65b"/><g clip-path="url(#${id}-body)" stroke="#423a31" stroke-width="7"><path d="M25 19q6 16 0 34M40 18q6 16 0 35M54 21q5 14 0 29"/></g></g>
+        <path d="M53 25q8-15 14-9t-3 5M48 24q0-16 7-16t1 7" fill="none" stroke="#554637" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="m32 49-3 4m13-3 2 3" stroke="#554637" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>`;
+      layer.append(node);
+      const fromLeft = i % 2 === 0;
+      const bee = { node, route: [available[i * 2], available[i * 2 + 1]], index: 0, x: fromLeft ? -65 : innerWidth + 65, y: 80 + i * 95, stage: 'fly', pollen: false, lastPollen: 0, delay: performance.now() + i * 350 };
+      beginFlight(bee, bee.route[0], bee.delay);
+      bees.push(bee);
+    }
+    if (!flightFrame) flightFrame = requestAnimationFrame(fly);
+  }
+
+  function beginFlight(bee, target, now) {
+    bee.fromX = bee.x; bee.fromY = bee.y;
+    bee.toX = target.x; bee.toY = target.y - 12;
+    bee.start = now;
+    bee.duration = Math.max(1100, Math.min(2400, Math.hypot(bee.toX - bee.x, bee.toY - bee.y) * 3.5));
+    bee.stage = 'fly';
+    bee.node.classList.remove('is-landed');
+  }
+
+  function pollen(bee) {
+    const dot = document.createElement('i');
+    dot.className = 'bee-pollen';
+    dot.style.left = `${bee.x}px`; dot.style.top = `${bee.y + 8}px`;
+    dot.style.setProperty('--drift', `${Math.random() * 28 - 14}px`);
+    layer.append(dot);
+    dot.addEventListener('animationend', () => dot.remove(), { once: true });
+  }
+
+  // Count actual landings. A second landing retires only that flower.
+  function land(bee, now) {
+    const flower = bee.route[bee.index];
+    if (flower && !flower.retiring && flower.node.isConnected) {
+      flower.visits++;
+      flower.node.dataset.visits = flower.visits;
+      if (flower.visits >= 2) {
+        flower.retiring = true;
+        flower.node.classList.add('is-retiring');
+        const cleanup = setTimeout(() => { flower.node.remove(); cleanupTimers.delete(cleanup); }, 650);
+        cleanupTimers.add(cleanup);
+        flowers = flowers.filter(f => f !== flower);
+      }
+    }
+    bee.pollen = true;
+    bee.stage = 'land'; bee.until = now + 850;
+    bee.node.classList.add('is-landed');
+  }
+
+  function fly(now) {
+    flightFrame = 0;
+    if (!enabled || document.hidden || reduced.matches) return;
+    for (const bee of bees) {
+      if (bee.stage === 'land') {
+        if (now >= bee.until) {
+          bee.index++;
+          if (bee.index < bee.route.length) beginFlight(bee, bee.route[bee.index], now);
+          else { bee.exiting = true; beginFlight(bee, { x: bee.x < innerWidth / 2 ? -90 : innerWidth + 90, y: Math.max(40, bee.y - 120) }, now); }
+        }
+      } else if (now >= bee.start) {
+        const progress = Math.min(1, (now - bee.start) / bee.duration);
+        const eased = progress * progress * (3 - 2 * progress);
+        bee.x = bee.fromX + (bee.toX - bee.fromX) * eased;
+        bee.y = bee.fromY + (bee.toY - bee.fromY) * eased - Math.sin(progress * Math.PI) * 35;
+        if (bee.pollen && now - bee.lastPollen > 130) { pollen(bee); bee.lastPollen = now; }
+        if (progress === 1) {
+          if (bee.exiting) { bee.done = true; bee.node.remove(); }
+          else land(bee, now);
+        }
+      }
+      bee.node.style.transform = `translate3d(${bee.x - 27}px, ${bee.y - 22}px, 0) scaleX(${bee.toX >= bee.fromX ? 1 : -1})`;
+    }
+    bees = bees.filter(bee => !bee.done);
+    if (bees.length) flightFrame = requestAnimationFrame(fly);
+    else waveTimer = setTimeout(startBees, 1200);
+  }
+
+  function stopBees() {
+    cancelAnimationFrame(flightFrame); flightFrame = 0;
+    clearTimeout(waveTimer);
+    bees.forEach(bee => bee.node.remove()); bees = [];
+    layer.querySelectorAll('.bee-pollen').forEach(dot => dot.remove());
+  }
 
   function clearFlowers() {
     clearTimeout(timer);
+    stopBees();
+    flowers = [];
     cleanupTimers.forEach(clearTimeout);
     cleanupTimers.clear();
     layer.replaceChildren();
@@ -37,7 +143,10 @@
       <g class="flower-bud"><path d="M60 65C44 51 47 35 60 28C73 35 76 51 60 65Z" fill="#dba2b6" stroke="#b67791" stroke-width="1"/><path d="M60 64Q44 62 47 48L60 59L73 48Q76 62 60 64Z" fill="#a6bd96"/></g>
       ${petals}<g class="bloom-center"><circle cx="60" cy="54" r="7.5" fill="#e9c47e"/><circle cx="57" cy="52" r="1" fill="#b88e4d"/><circle cx="63" cy="52" r="1" fill="#b88e4d"/><circle cx="60" cy="57" r="1" fill="#b88e4d"/></g>
     </svg>`;
-    layer.replaceChildren(flower);
+    flower.dataset.visits = '0';
+    layer.append(flower);
+    flowers.push({ node: flower, x: point.x, y: point.y, visits: 0, id: flowerNumber, ready: performance.now() + 1900 });
+    if (flowers.length > 5) { clearTimeout(waveTimer); startBees(); }
   }
 
   function arm() {
@@ -45,15 +154,7 @@
     if (enabled && point && !document.hidden && !hasBloomed) timer = setTimeout(bloom, 2000);
   }
 
-  // One bloom per resting position; the old flower gently fades when movement resumes.
-  function retire() {
-    const flower = layer.querySelector('.idle-flower:not(.is-retiring)');
-    if (!flower) return;
-    flower.classList.add('is-retiring');
-    const cleanup = setTimeout(() => { flower.remove(); cleanupTimers.delete(cleanup); }, 350);
-    cleanupTimers.add(cleanup);
-  }
-
+  // Flowers persist until two bee visits or the whole effect is switched off.
   function toggle(value) {
     enabled = value;
     clearFlowers();
@@ -65,22 +166,22 @@
   }
 
   window.addEventListener('pointermove', event => {
-    if (event.pointerType === 'touch') { point = null; clearFlowers(); return; }
+    if (event.pointerType === 'touch') { point = null; clearTimeout(timer); return; }
     // A small tolerance avoids restarting the timer for sub-pixel hand tremor.
     if (!point || Math.hypot(event.clientX - point.x, event.clientY - point.y) > 3) {
       point = { x: event.clientX, y: event.clientY };
       hasBloomed = false;
-      retire();
       arm();
     }
   }, { passive: true });
-  function reset() { point = null; hasBloomed = false; clearFlowers(); }
+  function reset() { point = null; hasBloomed = false; clearTimeout(timer); }
   button.addEventListener('click', () => toggle(!enabled));
   document.documentElement.addEventListener('pointerleave', reset);
   window.addEventListener('blur', reset);
   window.addEventListener('scroll', reset, { passive: true });
-  window.addEventListener('resize', reset);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) reset(); });
+  window.addEventListener('resize', () => { reset(); clearFlowers(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { reset(); stopBees(); } else startBees(); });
+  reduced.addEventListener('change', () => { if (reduced.matches) stopBees(); else startBees(); });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') toggle(false);
     else if (event.key === 'Tab') reset();

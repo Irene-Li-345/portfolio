@@ -187,3 +187,12 @@ Note: The hero gradient motion was removed at the user's request after T22. The 
 - **Steps to run:** Check all pages at widths 320, 390, 768, and 1200 pixels. Enable reduced motion, then trigger an idle bloom and disable it.
 - **Expected result:** Flower button stays left of the theme switch without horizontal overflow. Decorations do not intercept pointer events. Reduced motion shows a static open flower with no bud/unfurl animation. Disabling clears it immediately.
 - **Actual result:** **Pass** in Chrome across the listed widths, with reduced-motion emulation.
+
+### T25: Persistent flowers and bee pollination
+
+- **What is being tested:** Six-flower threshold, bee routes, pollen, and two-visit flower removal.
+- **Steps to run:** Enable blooms and rest the pointer at six distinct positions for over two seconds each. Watch the bees complete their visits and leave. Trigger another flower, then press Escape. Repeat with reduced motion enabled.
+- **Expected result:** Flowers persist on movement. No bees at five flowers; three enter above five, visit two distinct flowers each, then exit. Pollen falls and disappears after collection. Flowers remain at one landing and fade at two landings. Escape clears everything, and reduced motion suppresses bees and pollen.
+- **Actual result:** **Pass** in Chrome on November 12, 2026. Six blooms persisted; no early bees appeared. Observed visit counts of one and two, pollen particles, flower removal at two, bee exit and particle cleanup. New blooms and Escape cleanup passed without script errors; reduced-motion flowers were static with no bees.
+
+The persistent-flower behavior replaces T23's earlier expectation that movement fades a flower. Movement now resets only the next bloom timer; flowers remain until pollinated twice or the effect is disabled.

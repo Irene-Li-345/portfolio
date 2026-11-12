@@ -7,7 +7,7 @@
 .bloom-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 3px; border-radius: 50%; }
 /* Native pointer and document layout stay unchanged; artwork cannot block clicks. */
 .idle-flower-layer { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 30; }
-.idle-flower { position: absolute; width: 110px; height: 110px; transform: translate(-50%, -45%); opacity: 1; transition: opacity .3s; }
+.idle-flower { position: absolute; width: 110px; height: 110px; transform: translate(-50%, -45%); opacity: 1; transition: opacity .6s; }
 .idle-flower svg { display: block; width: 100%; height: 100%; }
 .idle-flower.is-retiring { opacity: 0; }
 .flower-bud { animation: bud-open .65s ease .3s both; }
@@ -29,3 +29,13 @@
   .idle-flower *, .idle-flower { animation: none; transition: none; }
   .flower-bud { display: none; }
 }
+
+/* Fuzzy striped bodies have no separate head; antennae curl above the oval. */
+.fluffy-bee { position: absolute; left: 0; top: 0; width: 54px; height: 44px; pointer-events: none; will-change: transform; }
+.fluffy-bee svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.bee-wings { transform-box: view-box; transform-origin: 38px 30px; animation: bee-flutter .065s ease-in-out infinite alternate; }
+.fluffy-bee.is-landed .bee-wings { animation-duration: .12s; }
+.bee-pollen { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #efd05d; box-shadow: 0 0 3px #efce6570; pointer-events: none; animation: pollen-fall 1.1s ease-out forwards; }
+@keyframes bee-flutter { from { transform: scaleY(1) rotate(-7deg); } to { transform: scaleY(.3) rotate(7deg); } }
+@keyframes pollen-fall { from { opacity: .95; transform: translate(0, 0); } to { opacity: 0; transform: translate(var(--drift), 55px); } }
+@media (prefers-reduced-motion: reduce) { .fluffy-bee, .bee-pollen { display: none; } }
