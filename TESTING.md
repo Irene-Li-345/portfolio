@@ -196,3 +196,10 @@ Note: The hero gradient motion was removed at the user's request after T22. The 
 - **Steps to run:** Enable reduced motion while the garden is active. Move the pointer, then toggle off. In a touch-enabled mobile context, tap the flower button.
 - **Expected result:** Reduced motion disables bloom/wing animation and retains the native cursor. Touch shows lotuses without a dragonfly.
 - **Actual result:** **Pass** in Chrome with reduced-motion emulation and a touch-enabled mobile context.
+
+### T26: Reference-style watercolor artwork
+
+- **What is being tested:** Transparent, optimized watercolor lotus images and existing garden interactions.
+- **Steps to run:** Toggle the garden on all three pages; inspect both corners in light and dark mode, and check mobile layout. Enable reduced motion, then dismiss with Escape. Check the asset's alpha channel and file size.
+- **Expected result:** Detailed cream/pink petals and teal leaves appear without a rectangular background. Bloom reveal, cursor, dismissal, and touch fallback still work. The image is below 500 KB.
+- **Actual result:** **Pass** in Chrome on November 12, 2026. Verified transparent 640 x 640 WebP (98,422 bytes), both corner images, mobile layouts, reduced-motion suppression, click-through behavior, Escape, and touch fallback without script errors. Bloom now reveals the complete painting instead of separately animating SVG petals.

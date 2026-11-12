@@ -12,38 +12,9 @@
   garden.hidden = true;
   garden.setAttribute('aria-hidden', 'true');
 
-  // Layer translucent petals with a paper-grain filter for a watercolor wash.
+  // Transparent watercolor artwork is shared by both corners, with the right mirrored.
   function lotus(side) {
-    const id = `lotus-wash-${side}`;
-    return `<div class="lotus-corner lotus-${side}"><svg viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg" focusable="false">
-      <defs>
-        <filter id="${id}" x="-15%" y="-15%" width="130%" height="130%">
-          <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="7" result="grain"/>
-          <feDisplacementMap in="SourceGraphic" in2="grain" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
-        <radialGradient id="${id}-pink"><stop stop-color="#fbe0e7"/><stop offset=".68" stop-color="#e8a5bc"/><stop offset="1" stop-color="#bc789c" stop-opacity=".8"/></radialGradient>
-        <linearGradient id="${id}-leaf" x2="1" y2="1"><stop stop-color="#d6dfb9"/><stop offset="1" stop-color="#779b85"/></linearGradient>
-      </defs>
-      <g filter="url(#${id})">
-        <ellipse cx="120" cy="170" rx="104" ry="13" fill="#b3c8be" opacity=".15"/>
-        <g class="lotus-leaves" fill="url(#${id}-leaf)" opacity=".8">
-          <path d="M121 167Q62 111 14 157Q52 187 121 167Z"/><path d="M119 167Q179 116 226 157Q183 188 119 167Z"/>
-          <path d="M119 166Q70 147 40 167M121 166q40-17 78 0" stroke="#688d7d" stroke-width="1" fill="none" opacity=".45"/>
-        </g>
-        <g class="lotus-petals" fill="url(#${id}-pink)" stroke="#b97896" stroke-width=".65" stroke-opacity=".35">
-          <path class="lotus-petal petal-outer" d="M119 159Q49 158 24 90Q88 94 119 159Z" opacity=".8"/>
-          <path class="lotus-petal petal-outer" d="M121 159Q190 158 216 90Q153 94 121 159Z" opacity=".8"/>
-          <path class="lotus-petal petal-middle" d="M119 158Q53 126 67 48Q116 77 119 158Z" opacity=".85"/>
-          <path class="lotus-petal petal-middle" d="M121 158Q187 126 173 48Q125 77 121 158Z" opacity=".85"/>
-          <path class="lotus-petal petal-center" d="M120 157Q77 105 120 20Q164 104 120 157Z" opacity=".94"/>
-          <path class="lotus-petal petal-front" d="M120 162Q63 175 43 122Q99 111 120 162Z" opacity=".92"/>
-          <path class="lotus-petal petal-front" d="M120 162Q177 175 197 122Q142 111 120 162Z" opacity=".92"/>
-          <path class="lotus-petal petal-front" d="M120 166Q92 149 120 112Q147 150 120 166Z"/>
-        </g>
-        <path d="M120 148V71M111 147 91 91m39 56 20-56" stroke="#fff4ec" stroke-width="1.1" opacity=".4" fill="none"/>
-        <ellipse cx="120" cy="162" rx="10" ry="3" fill="#e9c781" opacity=".8"/>
-      </g>
-    </svg></div>`;
+    return `<div class="lotus-corner lotus-${side}"><img class="lotus-art" src="assets/lotus-watercolor.webp" width="640" height="640" alt="" draggable="false"></div>`;
   }
   garden.innerHTML = lotus('left') + lotus('right');
   const dragonfly = document.createElement('div');
