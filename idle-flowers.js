@@ -174,7 +174,7 @@
     </svg>`;
     flower.dataset.visits = '0';
     layer.append(flower);
-    flowers.push({ node: flower, x: documentX, y: documentY, visits: 0, id: flowerNumber, pink, petalCount, ready: performance.now() + 2050 });
+    flowers.push({ node: flower, x: documentX, y: documentY, visits: 0, id: flowerNumber, pink, petalCount, leafCount, ready: performance.now() + 2050 });
     if (flowers.length > 5) { clearTimeout(waveTimer); startBees(); }
   }
 
@@ -204,6 +204,14 @@
       node.style.background = `radial-gradient(ellipse at 35% 30%, #fff1f6, ${flower.pink} 70%, #c1819c)`;
       layer.append(node);
       petals.push({ node, x: flower.x, y: Math.max(flower.y, scrollY + 8), vx: (i - (flower.petalCount - 1) / 2) * 20, vy: -12 - Math.random() * 28, drift: Math.random() * Math.PI * 2, turn: Math.random() * 360, age: 0 });
+    }
+    // Each leaf detaches too, using the same page-space flutter and cleanup.
+    for (let i = 0; i < flower.leafCount; i++) {
+      const node = document.createElement('span');
+      node.className = 'scattered-petal scattered-leaf';
+      node.innerHTML = '<svg viewBox="0 0 24 34" aria-hidden="true"><path d="M3 31Q-2 8 21 2Q27 24 3 31Z" fill="#c7d6b2" stroke="#8ca78b" stroke-width=".8"/><path d="M3 31 19 5m-9 15-5-5m9-1 5 2" fill="none" stroke="#8ca78b" stroke-width=".7"/></svg>';
+      layer.append(node);
+      petals.push({ node, x: flower.x + (i % 2 ? 12 : -12), y: Math.max(flower.y + 16, scrollY + 12), vx: (i - (flower.leafCount - 1) / 2) * 24, vy: -8 - Math.random() * 20, drift: Math.random() * Math.PI * 2, turn: Math.random() * 360, age: 0 });
     }
     while (petals.length > 140) petals.shift().node.remove();
     if (!petalFrame && !document.hidden) petalFrame = requestAnimationFrame(fall);

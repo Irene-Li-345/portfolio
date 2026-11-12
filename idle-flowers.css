@@ -48,3 +48,7 @@
 /* Detached petals drift in page space while the viewport clips them naturally. */
 .scattered-petal { position: absolute; top: 0; left: 0; width: 17px; height: 25px; border-radius: 80% 15% 75% 25%; box-shadow: inset 0 0 0 1px #bc8ba033; pointer-events: none; will-change: transform; }
 @media (prefers-reduced-motion: reduce) { .scattered-petal { display: none; } }
+
+/* Detached leaves share the petal physics, with their own green silhouette. */
+.scattered-leaf { width: 22px; height: 31px; background: none; border-radius: 0; box-shadow: none; }
+.scattered-leaf svg { display: block; width: 100%; height: 100%; }
