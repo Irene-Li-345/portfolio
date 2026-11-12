@@ -242,3 +242,16 @@ The five-flower threshold supersedes earlier six-flower threshold tests. Viewpor
 - **Actual result:** **Pass** in Chrome against a local HTTP server. Verified tab return, navigation, reload, new-tab preference, Escape behavior, and explicit off-state synchronization.
 
 This button-only disable behavior supersedes earlier Escape-to-disable test expectations. New pages retain the enabled preference; each page has its own arrangement of flowers.
+
+## Combined current-version verification - November 12, 2026
+
+Re-ran T29 and T30 together after adding persistent flower mode. All checks passed in Chrome desktop and mobile-touch contexts:
+
+- Flowers survive viewport-height changes and ordinary scrolling on both device profiles.
+- Flowers crossing the viewport top burst into petals and leaves on mobile and desktop.
+- Bees appear after five flowers, with none before that threshold.
+- Desktop double-clicks and two-second idling both produce blooms; mobile double taps produce one bloom each.
+- Falling pieces use a document-space layer: their displacement immediately matches native scrolling without requiring a JavaScript transform update, while their downward drift continues independently.
+- The flower button clears the effect without overflow or script errors. This current test uses the button rather than Escape, respecting the persistent-mode requirement.
+
+No application changes were needed for this verification. These are browser-emulation checks; they do not guarantee a specific frame rate on every physical device.
