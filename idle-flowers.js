@@ -26,14 +26,14 @@
 
   // Bees work in small waves: each visits two different flowers, then leaves.
   function startBees() {
-    if (!enabled || reduced.matches || document.hidden || bees.length || flowers.length <= 5) return;
+    if (!enabled || reduced.matches || document.hidden || bees.length || flowers.filter(f => !f.retiring).length <= 4) return;
     const available = flowers.filter(f => f.node.isConnected && !f.retiring && f.ready <= performance.now() && f.y - scrollY > 30 && f.y - scrollY < innerHeight - 30);
-    if (available.length < 6) {
+    if (available.length < 2) {
       if (flowers.some(f => f.ready > performance.now())) waveTimer = setTimeout(startBees, 700);
       return;
     }
     available.sort((a, b) => a.visits - b.visits || a.id - b.id);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < Math.min(3, Math.floor(available.length / 2)); i++) {
       const node = document.createElement('div');
       node.className = 'fluffy-bee';
       const id = `bee-fuzz-${flowerNumber}-${i}`;
@@ -175,7 +175,7 @@
     flower.dataset.visits = '0';
     layer.append(flower);
     flowers.push({ node: flower, x: documentX, y: documentY, visits: 0, id: flowerNumber, pink, petalCount, leafCount, ready: performance.now() + 2050 });
-    if (flowers.length > 5) { clearTimeout(waveTimer); startBees(); }
+    if (flowers.filter(f => !f.retiring).length > 4) { clearTimeout(waveTimer); startBees(); }
   }
 
   // Keep document coordinates while drawing in a click-through viewport layer.
@@ -298,7 +298,15 @@
     if (!scrollFrame) scrollFrame = requestAnimationFrame(renderFlowers);
     waveTimer = setTimeout(startBees, 300);
   }, { passive: true });
-  window.addEventListener('resize', () => { reset(); clearFlowers(); });
+  // Mobile browser bars change viewport size during scrolling: preserve the garden.
+  window.addEventListener('resize', () => {
+    reset();
+    if (!enabled) return;
+    stopBees();
+    for (const flower of flowers) flower.x = Math.max(scrollX + 15, Math.min(scrollX + innerWidth - 15, flower.x));
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(renderFlowers);
+    waveTimer = setTimeout(startBees, 300);
+  });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { reset(); stopBees(); cancelAnimationFrame(petalFrame); petalFrame = 0; petalTime = 0; }
     else { startBees(); if (petals.length && !petalFrame) petalFrame = requestAnimationFrame(fall); }

@@ -217,3 +217,12 @@ The persistent-flower behavior replaces T23's earlier expectation that movement 
 - **Steps to run:** In a touch-enabled mobile browser, enable the flower effect. Single-tap a non-interactive area, then double-tap it. Enable reduced motion and scroll the flower past the top.
 - **Expected result:** Single tap does not bloom; double tap blooms immediately. Touch pointer-leave events do not cancel the gesture. With reduced motion, crossing the top removes the flower without moving petals.
 - **Actual result:** **Pass** in Chrome with mobile touch emulation. Verified single/double tap distinction, bloom, and reduced-motion removal without script errors.
+
+### T29: Mobile viewport persistence and five-flower bee threshold
+
+- **What is being tested:** Desktop/mobile bee activation, viewport resizing, and top-edge bursts.
+- **Steps to run:** Create five flowers using idle mouse blooms on desktop and double taps on mobile. Check for no bees before the fifth flower, then wait for bees. Change viewport height, scroll 100 pixels, change height again, and finally scroll flowers beyond the top edge.
+- **Expected result:** Bees enter after five flowers on both devices. Resizing and ordinary scroll preserve all flowers. Crossing the top produces falling petals and leaves on mobile and desktop. Existing second-bee pollination removal remains in effect.
+- **Actual result:** **Pass** in Chrome on November 12, 2026 with desktop and mobile-touch contexts. Five flowers survived viewport-height changes and ordinary scrolling, bees appeared at five, and top-edge scrolling generated petals and leaves without script errors.
+
+The five-flower threshold supersedes earlier six-flower threshold tests. Viewport resizing now preserves flowers instead of clearing them.
