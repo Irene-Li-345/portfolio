@@ -5,7 +5,11 @@
   const layer = document.createElement('div');
   layer.className = 'idle-flower-layer';
   layer.setAttribute('aria-hidden', 'true');
-  document.body.append(layer);
+  // A document-space layer lets the browser scroll falling pieces natively.
+  const petalLayer = document.createElement('div');
+  petalLayer.className = 'falling-petal-layer';
+  petalLayer.setAttribute('aria-hidden', 'true');
+  document.body.append(layer, petalLayer);
   button.hidden = false;
   let enabled = false;
   let point = null;
@@ -23,6 +27,9 @@
   let petalTime = 0;
   let scrollFrame = 0;
   let lastTap = null;
+  let lastTouchAt = -Infinity;
+  let petalBottom = 0;
+  let petalWidth = innerWidth;
 
   // Bees work in small waves: each visits two different flowers, then leaves.
   function startBees() {
@@ -140,6 +147,7 @@
     cleanupTimers.forEach(clearTimeout);
     cleanupTimers.clear();
     layer.replaceChildren();
+    petalLayer.replaceChildren();
   }
 
   // Bud fades as individual petals unfold outward from the same central point.
@@ -189,7 +197,6 @@
         flower.node.style.left = `${flower.x - scrollX}px`;
       }
     }
-    renderPetals();
   }
 
   function burst(flower) {
@@ -197,12 +204,15 @@
     flower.node.remove();
     flowers = flowers.filter(f => f !== flower);
     if (reduced.matches) return;
+    // Cache bounds once, not during every frame. Scrolling is handled by the browser.
+    petalBottom = document.documentElement.scrollHeight - 15;
+    petalWidth = innerWidth;
     // Detached petals retain page coordinates, allowing the user to follow them down.
     for (let i = 0; i < flower.petalCount; i++) {
       const node = document.createElement('span');
       node.className = 'scattered-petal';
       node.style.background = `radial-gradient(ellipse at 35% 30%, #fff1f6, ${flower.pink} 70%, #c1819c)`;
-      layer.append(node);
+      petalLayer.append(node);
       petals.push({ node, x: flower.x, y: Math.max(flower.y, scrollY + 8), vx: (i - (flower.petalCount - 1) / 2) * 20, vy: -12 - Math.random() * 28, drift: Math.random() * Math.PI * 2, turn: Math.random() * 360, age: 0 });
     }
     // Each leaf detaches too, using the same page-space flutter and cleanup.
@@ -210,7 +220,7 @@
       const node = document.createElement('span');
       node.className = 'scattered-petal scattered-leaf';
       node.innerHTML = '<svg viewBox="0 0 24 34" aria-hidden="true"><path d="M3 31Q-2 8 21 2Q27 24 3 31Z" fill="#c7d6b2" stroke="#8ca78b" stroke-width=".8"/><path d="M3 31 19 5m-9 15-5-5m9-1 5 2" fill="none" stroke="#8ca78b" stroke-width=".7"/></svg>';
-      layer.append(node);
+      petalLayer.append(node);
       petals.push({ node, x: flower.x + (i % 2 ? 12 : -12), y: Math.max(flower.y + 16, scrollY + 12), vx: (i - (flower.leafCount - 1) / 2) * 24, vy: -8 - Math.random() * 20, drift: Math.random() * Math.PI * 2, turn: Math.random() * 360, age: 0 });
     }
     while (petals.length > 140) petals.shift().node.remove();
@@ -219,7 +229,7 @@
 
   function renderPetals() {
     for (const petal of petals) {
-      petal.node.style.transform = `translate3d(${petal.x - scrollX + Math.sin(petal.age * 2 + petal.drift) * 18}px, ${petal.y - scrollY}px, 0) rotate(${petal.turn + petal.age * 35}deg)`;
+      petal.node.style.transform = `translate3d(${petal.x + Math.sin(petal.age * 2 + petal.drift) * 18}px, ${petal.y}px, 0) rotate(${petal.turn + petal.age * 35}deg)`;
     }
   }
 
@@ -228,12 +238,12 @@
     if (!enabled || document.hidden || reduced.matches) return;
     const dt = petalTime ? Math.min((now - petalTime) / 1000, .05) : 0;
     petalTime = now;
-    const bottom = document.documentElement.scrollHeight - 15;
+    const bottom = petalBottom;
     for (const petal of petals) {
       petal.age += dt;
       petal.vx *= Math.exp(-dt * 1.5);
       petal.vy = Math.min(85, petal.vy + 35 * dt);
-      petal.x = Math.max(10, Math.min(innerWidth - 25, petal.x + petal.vx * dt));
+      petal.x = Math.max(10, Math.min(petalWidth - 25, petal.x + petal.vx * dt));
       petal.y += petal.vy * dt;
       petal.node.style.opacity = String(Math.min(1, Math.max(0, (bottom - petal.y) / 75), Math.max(0, 65 - petal.age)));
       if (petal.y >= bottom || petal.age >= 65) { petal.done = true; petal.node.remove(); }
@@ -270,10 +280,18 @@
       arm();
     }
   }, { passive: true });
+  // Desktop double-click blooms immediately without changing links or form controls.
+  window.addEventListener('dblclick', event => {
+    if (!enabled || event.button !== 0 || performance.now() - lastTouchAt < 700 || event.sourceCapabilities?.firesTouchEvents || event.target.closest('a, button, input, textarea, select, label')) return;
+    clearTimeout(timer);
+    point = { x: event.clientX, y: event.clientY };
+    hasBloomed = false;
+    bloom();
+  });
   // Recognize a double tap without cancelling normal touch scrolling or link actions.
   let touchStart = null;
   window.addEventListener('pointerdown', event => {
-    if (event.pointerType === 'touch') touchStart = { x: event.clientX, y: event.clientY, time: performance.now() };
+    if (event.pointerType === 'touch') { lastTouchAt = performance.now(); touchStart = { x: event.clientX, y: event.clientY, time: lastTouchAt }; }
   }, { passive: true });
   window.addEventListener('pointerup', event => {
     if (event.pointerType !== 'touch' || !enabled || !touchStart) return;
@@ -303,6 +321,8 @@
     reset();
     if (!enabled) return;
     stopBees();
+    petalWidth = innerWidth;
+    petalBottom = document.documentElement.scrollHeight - 15;
     for (const flower of flowers) flower.x = Math.max(scrollX + 15, Math.min(scrollX + innerWidth - 15, flower.x));
     if (!scrollFrame) scrollFrame = requestAnimationFrame(renderFlowers);
     waveTimer = setTimeout(startBees, 300);

@@ -226,3 +226,10 @@ The persistent-flower behavior replaces T23's earlier expectation that movement 
 - **Actual result:** **Pass** in Chrome on November 12, 2026 with desktop and mobile-touch contexts. Five flowers survived viewport-height changes and ordinary scrolling, bees appeared at five, and top-edge scrolling generated petals and leaves without script errors.
 
 The five-flower threshold supersedes earlier six-flower threshold tests. Viewport resizing now preserves flowers instead of clearing them.
+
+### T30: Smooth native petal scrolling and desktop double-click blooms
+
+- **What is being tested:** Desktop idle/double-click input, mobile double-tap input, and continuous particle scrolling.
+- **Steps to run:** Enable the effect. Double-click a non-interactive desktop area, then wait still to check for duplicates; move elsewhere and idle to bloom again. Repeat with a mobile double tap. Scroll flowers past the top and continue scrolling while particles fall.
+- **Expected result:** Each gesture makes one flower, while desktop idling still works. Touch-generated double-clicks do not duplicate blooms. Petals and leaves move with native page scrolling independently of their animated drift; no horizontal overflow occurs and Escape clears all layers.
+- **Actual result:** **Pass** in Chrome desktop and mobile-touch contexts. Verified one bloom per gesture, desktop idle bloom, particle displacement matching scroll displacement without changing its transform, continued downward motion, cleanup, and no script errors. This checks scroll continuity in the tested browser, not a guaranteed frame rate on every device.

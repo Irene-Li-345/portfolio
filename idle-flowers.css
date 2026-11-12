@@ -52,3 +52,6 @@
 /* Detached leaves share the petal physics, with their own green silhouette. */
 .scattered-leaf { width: 22px; height: 31px; background: none; border-radius: 0; box-shadow: none; }
 .scattered-leaf svg { display: block; width: 100%; height: 100%; }
+
+/* Page-space particles move with native scrolling instead of JS scroll compensation. */
+.falling-petal-layer { position: absolute; inset: 0; z-index: 30; overflow: hidden; pointer-events: none; contain: layout style paint; }
