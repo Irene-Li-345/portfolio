@@ -7,7 +7,7 @@
 .garden-toggle:focus-visible { outline: 2px solid var(--tone); outline-offset: 3px; border-radius: 50%; }
 .lotus-garden { position: fixed; inset: 0; z-index: 20; pointer-events: none; user-select: none; overflow: hidden; }
 .lotus-garden[hidden], .dragonfly-cursor[hidden] { display: none; }
-.lotus-corner { position: absolute; bottom: -9px; width: clamp(120px, 18vw, 230px); }
+.lotus-corner { position: absolute; bottom: -9px; width: clamp(280px, 35vw, 480px); }
 .lotus-left { left: -14px; }
 .lotus-right { right: -14px; transform: scaleX(-1); }
 .lotus-art { display: block; width: 100%; height: auto; transform-origin: 50% 90%; animation: lotus-bloom 1.6s cubic-bezier(.2,.7,.3,1) both; }
@@ -34,3 +34,6 @@
   .lotus-art, .dragonfly-wing { animation: none; }
   .dragonfly-cursor { display: none; }
 }
+
+/* Keep the larger blooms within the narrow-screen corners. */
+@media (max-width: 700px) { .lotus-corner { width: clamp(190px, 48vw, 300px); } }
