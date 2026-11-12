@@ -26,15 +26,15 @@
   left: -4%;
   bottom: .04em;
   width: 108%;
-  height: .27em;
+  height: .23em;
   overflow: visible;
   pointer-events: none;
   fill: none;
   stroke: currentColor;
-  stroke-width: 4.8;
+  stroke-width: 3.4;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: .95;
+  opacity: .85;
 }
 .greeting-flourish path {
   stroke-dasharray: 1;
