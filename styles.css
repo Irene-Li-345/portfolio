@@ -124,7 +124,7 @@ article + article { border-left: 1px solid var(--line); }
 }
 /* Small, varied botanical details, kept behind the content. */
 body { position: relative; isolation: isolate; }
-.background-flowers { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: #b99ca5; opacity: .12; }
+.background-flowers { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; color: #b99ca5; opacity: .23; }
 .background-flower { position: absolute; width: 42px; height: 58px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
 /* Position and rotate each decorative flower independently. */
 .background-flower:nth-child(1) { left: 1%; top: 7%; transform: rotate(-24deg); }
@@ -180,7 +180,7 @@ body { position: relative; isolation: isolate; }
 [data-theme="dark"] .intro-illustration:hover .code-drawing { color: #f0c5cb; }
 [data-theme="dark"] .flower-drawing,
 [data-theme="dark"] .background-flowers { color: #d9b7bf; }
-[data-theme="dark"] .background-flowers { opacity: .06; }
+[data-theme="dark"] .background-flowers { opacity: .14; }
 [data-theme="dark"] /* Keyboard skip link stays off screen until focused. */
 .skip-link { background: var(--paper); color: var(--ink); }
 [data-theme="dark"] a:focus-visible { outline-color: var(--tone); }
