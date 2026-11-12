@@ -137,9 +137,9 @@
     flower.style.top = `${point.y}px`;
     const id = `idle-petal-${++flowerNumber}`;
     // Cycle coordinated variants so neighboring flowers differ without random extremes.
-    const petalCount = 5 + (flowerNumber - 1) % 4;
+    const petalCount = 3 + (flowerNumber - 1) % 6;
     const leafCount = 1 + (flowerNumber - 1) % 3;
-    const pinks = ['#e7b0c2', '#eab6c7', '#dfabc2', '#edbdcb', '#e3aec7'];
+    const pinks = ['#f3cfdb', '#f8dce5', '#efd0e2', '#f9e5ec', '#f0c6d5', '#f5d8e8'];
     const pink = pinks[(flowerNumber - 1) % pinks.length];
     flower.dataset.petals = petalCount;
     flower.dataset.leaves = leafCount;
@@ -149,16 +149,11 @@
       'M63 77Q82 78 86 65Q70 62 63 77Z',
     ].slice(0, leafCount).map(d => `<path class="flower-leaf" d="${d}" fill="#c7d6b2" stroke-width="1"/>`).join('');
     const petals = Array.from({ length: petalCount }, (_, i) => `<g transform="rotate(${i * 360 / petalCount} 60 54)"><g class="unfurl-petal" style="--delay:${.3 + i * .065}s"><path d="M60 60C33 45 35 21 60 13C85 21 87 45 60 60Z" fill="url(#${id})" stroke="#b67791" stroke-width=".8"/><path d="M60 53V23" stroke="#fff5f5" stroke-width="1" opacity=".55"/></g></g>`).join('');
-    const spots = Array.from({ length: 15 }, (_, i) => {
-      const angle = i * 2.39996;
-      const radius = i === 0 ? 0 : 2.3 * Math.sqrt(i);
-      return `<circle class="pollen-spot" cx="${60 + Math.cos(angle) * radius}" cy="${54 + Math.sin(angle) * radius}" r="1.1" fill="#8c632e"/>`;
-    }).join('');
     flower.innerHTML = `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" focusable="false">
       <defs><radialGradient id="${id}" cx="50%" cy="75%" r="80%"><stop stop-color="#fbe6e9"/><stop offset=".7" stop-color="${pink}"/><stop offset="1" stop-color="#c1819c"/></radialGradient></defs>
       <g class="bloom-stem" fill="none" stroke="#8ca78b" stroke-width="2.2" stroke-linecap="round"><path d="M60 58Q67 82 59 108"/>${leaves}</g>
       <g class="flower-bud"><path d="M60 65C44 51 47 35 60 28C73 35 76 51 60 65Z" fill="#dba2b6" stroke="#b67791" stroke-width="1"/><path d="M60 64Q44 62 47 48L60 59L73 48Q76 62 60 64Z" fill="#a6bd96"/></g>
-      ${petals}<g class="bloom-center"><circle cx="60" cy="54" r="11.5" fill="#e9c47e"/>${spots}</g>
+      ${petals}<g class="bloom-center"><circle cx="60" cy="54" r="11.5" fill="#e9c47e"/></g>
     </svg>`;
     flower.dataset.visits = '0';
     layer.append(flower);
