@@ -279,3 +279,17 @@ nav, .actions, footer { flex-wrap: wrap; }
   .projects-page .project-grid { grid-template-columns: 1fr; }
   .projects-page .project-grid article { padding: 24px; }
 }
+
+/* Additional flowers are staggered between the original botanical accents. */
+.background-flower:nth-child(21) { left: 6%; top: 3%; transform: rotate(-15deg); }
+.background-flower:nth-child(22) { right: 7%; top: 10%; transform: rotate(23deg); }
+.background-flower:nth-child(23) { left: 5%; top: 20%; transform: rotate(48deg); }
+.background-flower:nth-child(24) { right: 6%; top: 29%; transform: rotate(-32deg); }
+.background-flower:nth-child(25) { left: 6%; top: 38%; transform: rotate(66deg); }
+.background-flower:nth-child(26) { right: 5%; top: 47%; transform: rotate(-19deg); }
+.background-flower:nth-child(27) { left: 5%; top: 57%; transform: rotate(24deg); }
+.background-flower:nth-child(28) { right: 6%; top: 65%; transform: rotate(-45deg); }
+.background-flower:nth-child(29) { left: 6%; top: 73%; transform: rotate(38deg); }
+.background-flower:nth-child(30) { right: 5%; top: 83%; transform: rotate(-28deg); }
+.background-flower:nth-child(31) { left: 5%; top: 88%; transform: rotate(15deg); }
+.background-flower:nth-child(32) { right: 7%; top: 95%; transform: rotate(52deg); }
