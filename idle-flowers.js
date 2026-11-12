@@ -260,8 +260,12 @@
   }
 
   // Flowers persist until two bee visits or the whole effect is switched off.
-  function toggle(value) {
+  function toggle(value, save = true) {
     enabled = value;
+    // Share the user's explicit choice across pages, reloads, and browser tabs.
+    if (save) {
+      try { localStorage.setItem('portfolio-flowers-enabled', String(enabled)); } catch { /* Keep working when storage is unavailable. */ }
+    }
     clearFlowers();
     hasBloomed = false;
     lastTap = null;
@@ -338,7 +342,11 @@
     } else startBees();
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') toggle(false);
-    else if (event.key === 'Tab') reset();
+    if (event.key === 'Tab') reset();
+  });
+  // Navigation and tab changes never turn the effect off; only its button does.
+  try { toggle(localStorage.getItem('portfolio-flowers-enabled') === 'true', false); } catch { /* Default off when there is no stored preference. */ }
+  window.addEventListener('storage', event => {
+    if (event.key === 'portfolio-flowers-enabled' && event.newValue !== null) toggle(event.newValue === 'true', false);
   });
 })();

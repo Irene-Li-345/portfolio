@@ -233,3 +233,12 @@ The five-flower threshold supersedes earlier six-flower threshold tests. Viewpor
 - **Steps to run:** Enable the effect. Double-click a non-interactive desktop area, then wait still to check for duplicates; move elsewhere and idle to bloom again. Repeat with a mobile double tap. Scroll flowers past the top and continue scrolling while particles fall.
 - **Expected result:** Each gesture makes one flower, while desktop idling still works. Touch-generated double-clicks do not duplicate blooms. Petals and leaves move with native page scrolling independently of their animated drift; no horizontal overflow occurs and Escape clears all layers.
 - **Actual result:** **Pass** in Chrome desktop and mobile-touch contexts. Verified one bloom per gesture, desktop idle bloom, particle displacement matching scroll displacement without changing its transform, continued downward motion, cleanup, and no script errors. This checks scroll continuity in the tested browser, not a guaranteed frame rate on every device.
+
+### T31: Persistent flower preference
+
+- **What is being tested:** Flower mode across navigation, reloads, and browser tabs.
+- **Steps to run:** Enable flowers, bloom one, switch to another browser tab and return. Navigate to Projects, reload, and press Escape. Turn the effect off using its button and check another open page.
+- **Expected result:** Tab switching preserves the current page's flowers. The enabled preference follows site navigation, reloads, and new tabs. Escape does not disable it; the button's choice synchronizes to other open site pages.
+- **Actual result:** **Pass** in Chrome against a local HTTP server. Verified tab return, navigation, reload, new-tab preference, Escape behavior, and explicit off-state synchronization.
+
+This button-only disable behavior supersedes earlier Escape-to-disable test expectations. New pages retain the enabled preference; each page has its own arrangement of flowers.
