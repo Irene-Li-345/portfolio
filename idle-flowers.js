@@ -136,8 +136,8 @@
     flower.style.left = `${point.x}px`;
     flower.style.top = `${point.y}px`;
     const id = `idle-petal-${++flowerNumber}`;
-    // Cycle coordinated variants so neighboring flowers differ without random extremes.
-    const petalCount = 3 + (flowerNumber - 1) % 6;
+    // Randomize each petal count independently, while keeping the coordinated pastel palette.
+    const petalCount = 3 + Math.floor(Math.random() * 5);
     const leafCount = 1 + (flowerNumber - 1) % 3;
     const pinks = ['#f3cfdb', '#f8dce5', '#efd0e2', '#f9e5ec', '#f0c6d5', '#f5d8e8'];
     const pink = pinks[(flowerNumber - 1) % pinks.length];
